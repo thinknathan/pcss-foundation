@@ -1,0 +1,98 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group top-bar */
+
+@define-mixin top-bar-container $padding: var(--topbar-padding),
+	$background: var(--topbar-background),
+	$submenu-background: var(--topbar-submenu-background),
+	$input-max-width: var(--topbar-input-width) {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: $(padding);
+
+	&,
+	ul {
+		background-color: $(background);
+	}
+
+	ul ul {
+		background-color: $(submenu-background);
+	}
+
+	/* Restrain width of inputs by default to make them easier to arrange */
+	input:not(.input-group-field) {
+		max-width: $(input-max-width);
+		margin-right: 1rem;
+	}
+}
+
+@define-mixin foundation-top-bar $selector, $breakpoint: medium, $left: -left,
+	$right: -right, $title: -title {
+	$(selector) {
+		/* Padding for the top bar. */
+		/* @type Number */
+		--topbar-padding: 0.5rem;
+
+		/* Background color for the top bar. This color also cascades to menus within the top bar. */
+		/* @type Color */
+		--topbar-background: var(--zf-color-light-gray, gray);
+
+		/* Background color submenus within the top bar. Usefull if var(--topbar-background) is transparent. */
+		/* @type Color */
+		--topbar-submenu-background: var(--topbar-background);
+
+		/* Spacing for the top bar title. */
+		/* @type Number */
+		--topbar-title-spacing: 0.5rem 1rem 0.5rem 0;
+
+		/* Maximum width of `<input>` elements inside the top bar. */
+		/* @type Number */
+		--topbar-input-width: 200px;
+
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin top-bar-container;
+		}
+
+		/* Stack on small screens by default */
+		flex-wrap: wrap;
+
+		/* Sub-sections */
+		$(selector)$(left),
+		$(selector)$(right) {
+			flex: 0 0 100%;
+			max-width: 100%;
+		}
+
+		/* stylelint-disable-next-line media-query-no-invalid */
+		@media (--zf-$(breakpoint)) {
+			flex-wrap: nowrap;
+
+			$(selector)$(left) {
+				flex: 1 1 auto;
+				margin-right: auto;
+			}
+
+			$(selector)$(right) {
+				flex: 0 1 auto;
+				margin-left: auto;
+			}
+		}
+
+		@mixin-content;
+	}
+
+	/* Sub-sections */
+	$(selector)$(title) {
+		flex: 0 0 auto;
+		margin: var(--topbar-title-spacing);
+	}
+
+	$(selector)$(left),
+	$(selector)$(right) {
+		flex: 0 0 auto;
+	}
+}

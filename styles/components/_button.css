@@ -1,0 +1,541 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group button */
+
+@define-mixin button-base $margin: var(--button-margin),
+	$padding: var(--button-padding), $border: var(--button-border),
+	$border-radius: var(--button-radius), $transition: var(--button-transition),
+	$font-family: var(--button-font-family),
+	$font-weight: var(--button-font-weight),
+	$font-size: var(--button-sizes-default) {
+	display: inline-block;
+	vertical-align: middle;
+	margin: $(margin);
+	padding: $(padding);
+
+	border: $(border);
+	border-radius: $(border-radius);
+	transition: $(transition);
+	font-family: $(font-family);
+	font-weight: $(font-weight);
+	-webkit-appearance: none;
+	line-height: 1;
+	text-align: center;
+	cursor: pointer;
+
+	/* default */
+	font-size: $(font-size);
+}
+
+@define-mixin button-style $background: var(--button-palette-primary),
+	$background-hover: var(--button-palette-primary),
+	$button-color: var(--button-color), $button-color-alt: var(--button-color-alt),
+	$background-hover-lightness: 80% {
+	&,
+	&.disabled,
+	&[disabled],
+	&.disabled:hover,
+	&[disabled]:hover,
+	&.disabled:focus,
+	&[disabled]:focus {
+		background-color: $(background);
+		color: $(button-color);
+		color: color-contrast(
+			$(background) vs $(button-color),
+			$(button-color-alt)
+		);
+	}
+
+	&:hover,
+	&:focus {
+		background-color: color-mix(
+			in srgb,
+			$(background-hover) $(background-hover-lightness),
+			black
+		);
+		color: $(button-color);
+		color: color-contrast(
+			color-mix(
+					in srgb,
+					$(background-hover) $(background-hover-lightness),
+					black
+				)
+				vs $(button-color),
+			$(button-color-alt)
+		);
+	}
+}
+
+@define-mixin foundation-button $element {
+	$(element) {
+		/* Font family for button elements. */
+		/* @type Font */
+		--button-font-family: inherit;
+
+		/* Font weight for button elements. */
+		/* @type Font-Weight */
+		--button-font-weight: bold;
+
+		/* Padding inside buttons. */
+		/* @type List */
+		--button-padding: 0.85em 1em;
+
+		/* Margin around buttons. */
+		/* @type List */
+		--button-margin: 0 0 var(--zf-global-margin, 1rem) 0;
+
+		/* Font color for buttons. */
+		/* @type List */
+		--button-color: var(--zf-color-white, white);
+
+		/* Alternative font color for buttons. */
+		/* @type List */
+		--button-color-alt: var(--zf-color-black, black);
+
+		/* Border radius for buttons, defaulted to global-radius. */
+		/* @type Number */
+		--button-radius: var(--zf-global-radius, 0);
+
+		/* Border for buttons, transparent by default */
+		/* @type List */
+		--button-border: 1px solid transparent;
+
+		/* Border width for hollow outline buttons */
+		/* @type Number */
+		--button-hollow-border-width: 1px;
+
+		/* Sizes for buttons. */
+		/* @type Number */
+		--button-sizes-tiny: 0.6rem;
+		--button-sizes-small: 0.75rem;
+		--button-sizes-default: 0.9rem;
+		--button-sizes-large: 1.25rem;
+
+		/* Coloring classes. */
+		/* @type Color */
+		--button-palette-primary: var(--zf-color-primary, green);
+		--button-palette-secondary: var(--zf-color-secondary, blue);
+		--button-palette-success: var(--zf-color-success, green);
+		--button-palette-warning: var(--zf-color-warning, orange);
+		--button-palette-alert: var(--zf-color-alert, red);
+
+		/* Opacity for a disabled button. */
+		/* @type List */
+		--button-opacity-disabled: 0.25;
+
+		/* Background color lightness on hover for buttons. */
+		/* @type Number */
+		--button-background-hover-lightness: 80%;
+
+		/* Color lightness on hover for hollow buttons. */
+		/* @type Number */
+		--button-hollow-hover-lightness: 50%;
+
+		/* Transitions for buttons. */
+		/* @type List */
+		--button-transition: background-color 0.25s ease-out, color 0.25s ease-out;
+
+		/* Padding for arrow */
+		/* @type Number */
+		--button-arrow-padding: 1em;
+
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin button-base;
+		}
+
+		/* Sizes */
+		&.tiny {
+			font-size: var(--button-sizes-tiny);
+		}
+		&.small {
+			font-size: var(--button-sizes-small);
+		}
+		&.large {
+			font-size: var(--button-sizes-large);
+		}
+
+		&.expanded {
+			display: block;
+			width: 100%;
+			margin-right: 0;
+			margin-left: 0;
+		}
+
+		/* Solid */
+		&,
+		&.primary {
+			@mixin button-style;
+		}
+
+		&.secondary {
+			@mixin button-style var(--button-palette-secondary)
+				var(--button-palette-secondary);
+		}
+
+		&.success {
+			@mixin button-style var(--button-palette-success)
+				var(--button-palette-success);
+		}
+
+		&.warning {
+			@mixin button-style var(--button-palette-warning)
+				var(--button-palette-warning);
+		}
+
+		&.alert {
+			@mixin button-style var(--button-palette-alert)
+				var(--button-palette-alert);
+		}
+
+		/* Hollow */
+		&.hollow {
+			&,
+			&.disabled,
+			&[disabled] {
+				&,
+				&:hover,
+				&:focus {
+					background-color: transparent;
+				}
+			}
+
+			&.primary {
+				&,
+				&.disabled,
+				&[disabled],
+				&.disabled:hover,
+				&[disabled]:hover,
+				&.disabled:focus,
+				&[disabled]:focus {
+					border: 1px solid var(--button-palette-primary);
+					color: var(--button-palette-primary);
+				}
+
+				&:hover,
+				&:focus {
+					border: 1px solid
+						color-mix(
+							in srgb,
+							var(--button-palette-primary)
+								var(--button-background-hover-lightness),
+							black
+						);
+					color: color-mix(
+						in srgb,
+						var(--button-palette-primary) var(--button-hollow-hover-lightness),
+						black
+					);
+				}
+			}
+
+			&.secondary {
+				&,
+				&.disabled,
+				&[disabled],
+				&.disabled:hover,
+				&[disabled]:hover,
+				&.disabled:focus,
+				&[disabled]:focus {
+					border: 1px solid var(--button-palette-secondary);
+					color: var(--button-palette-secondary);
+				}
+
+				&:hover,
+				&:focus {
+					border: 1px solid
+						color-mix(
+							in srgb,
+							var(--button-palette-secondary)
+								var(--button-background-hover-lightness),
+							black
+						);
+					color: color-mix(
+						in srgb,
+						var(--button-palette-secondary) var(--button-hollow-hover-lightness),
+						black
+					);
+				}
+			}
+
+			&.success {
+				&,
+				&.disabled,
+				&[disabled],
+				&.disabled:hover,
+				&[disabled]:hover,
+				&.disabled:focus,
+				&[disabled]:focus {
+					border: 1px solid var(--button-palette-success);
+					color: var(--button-palette-success);
+				}
+
+				&:hover,
+				&:focus {
+					border: 1px solid
+						color-mix(
+							in srgb,
+							var(--button-palette-success)
+								var(--button-background-hover-lightness),
+							black
+						);
+					color: color-mix(
+						in srgb,
+						var(--button-palette-success) var(--button-hollow-hover-lightness),
+						black
+					);
+				}
+			}
+
+			&.warning {
+				&,
+				&.disabled,
+				&[disabled],
+				&.disabled:hover,
+				&[disabled]:hover,
+				&.disabled:focus,
+				&[disabled]:focus {
+					border: 1px solid var(--button-palette-warning);
+					color: var(--button-palette-warning);
+				}
+
+				&:hover,
+				&:focus {
+					border: 1px solid
+						color-mix(
+							in srgb,
+							var(--button-palette-warning)
+								var(--button-background-hover-lightness),
+							black
+						);
+					color: color-mix(
+						in srgb,
+						var(--button-palette-warning) var(--button-hollow-hover-lightness),
+						black
+					);
+				}
+			}
+
+			&.alert {
+				&,
+				&.disabled,
+				&[disabled],
+				&.disabled:hover,
+				&[disabled]:hover,
+				&.disabled:focus,
+				&[disabled]:focus {
+					border: 1px solid var(--button-palette-alert);
+					color: var(--button-palette-alert);
+				}
+
+				&:hover,
+				&:focus {
+					border: 1px solid
+						color-mix(
+							in srgb,
+							var(--button-palette-alert)
+								var(--button-background-hover-lightness),
+							black
+						);
+					color: color-mix(
+						in srgb,
+						var(--button-palette-alert) var(--button-hollow-hover-lightness),
+						black
+					);
+				}
+			}
+		}
+
+		/* Clear */
+		&.clear {
+			&,
+			&.disabled,
+			&[disabled] {
+				&,
+				&:hover,
+				&:focus {
+					border-color: transparent;
+					background-color: transparent;
+				}
+			}
+
+			&.primary {
+				&,
+				&.disabled,
+				&[disabled],
+				&.disabled:hover,
+				&[disabled]:hover,
+				&.disabled:focus,
+				&[disabled]:focus {
+					color: var(--button-palette-primary);
+				}
+
+				&:hover,
+				&:focus {
+					color: color-mix(
+						in srgb,
+						var(--button-palette-primary)
+							var(--button-background-hover-lightness),
+						black
+					);
+				}
+			}
+
+			&.secondary {
+				&,
+				&.disabled,
+				&[disabled],
+				&.disabled:hover,
+				&[disabled]:hover,
+				&.disabled:focus,
+				&[disabled]:focus {
+					color: var(--button-palette-secondary);
+				}
+
+				&:hover,
+				&:focus {
+					color: color-mix(
+						in srgb,
+						var(--button-palette-secondary)
+							var(--button-background-hover-lightness),
+						black
+					);
+				}
+			}
+
+			&.success {
+				&,
+				&.disabled,
+				&[disabled],
+				&.disabled:hover,
+				&[disabled]:hover,
+				&.disabled:focus,
+				&[disabled]:focus {
+					color: var(--button-palette-success);
+				}
+
+				&:hover,
+				&:focus {
+					color: color-mix(
+						in srgb,
+						var(--button-palette-success)
+							var(--button-background-hover-lightness),
+						black
+					);
+				}
+			}
+
+			&.warning {
+				&,
+				&.disabled,
+				&[disabled],
+				&.disabled:hover,
+				&[disabled]:hover,
+				&.disabled:focus,
+				&[disabled]:focus {
+					color: var(--button-palette-warning);
+				}
+
+				&:hover,
+				&:focus {
+					color: color-mix(
+						in srgb,
+						var(--button-palette-warning)
+							var(--button-background-hover-lightness),
+						black
+					);
+				}
+			}
+
+			&.alert {
+				&,
+				&.disabled,
+				&[disabled],
+				&.disabled:hover,
+				&[disabled]:hover,
+				&.disabled:focus,
+				&[disabled]:focus {
+					color: var(--button-palette-alert);
+				}
+
+				&:hover,
+				&:focus {
+					color: color-mix(
+						in srgb,
+						var(--button-palette-alert) var(--button-background-hover-lightness),
+						black
+					);
+				}
+			}
+		}
+
+		/* Disabled state */
+		&.disabled,
+		&[disabled] {
+			opacity: var(--button-opacity-disabled);
+			cursor: not-allowed;
+		}
+
+		/* Dropdown arrow */
+		&.dropdown {
+			&::after {
+				@mixin css-triangle-down 0.4em, var(--zf-color-white);
+
+				position: relative;
+				top: 0.4em; /* Aligns the arrow with the text of the button */
+
+				display: block;
+				float: right;
+				margin-left: var(--button-arrow-padding);
+			}
+
+			&.hollow,
+			&.clear {
+				&::after,
+				&.primary {
+					&::after {
+						border-top-color: var(--zf-color-primary);
+					}
+				}
+				&.secondary {
+					&::after {
+						border-top-color: var(--zf-color-secondary);
+					}
+				}
+				&.warning {
+					&::after {
+						border-top-color: var(--zf-color-warning);
+					}
+				}
+				&.success {
+					&::after {
+						border-top-color: var(--zf-color-success);
+					}
+				}
+				&.alert {
+					&::after {
+						border-top-color: var(--zf-color-alert);
+					}
+				}
+			}
+		}
+
+		/* Button with dropdown arrow only */
+		&.arrow-only::after {
+			top: -0.1em;
+			float: none;
+			margin-left: 0;
+		}
+
+		@mixin-content;
+	}
+
+	a$(element) {
+		&:hover,
+		&:focus {
+			text-decoration: none;
+		}
+	}
+}

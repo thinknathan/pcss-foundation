@@ -1,0 +1,138 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group callout */
+
+@define-mixin callout-base $margin: var(--callout-margin),
+	$padding: var(--callout-size-default), $border: var(--callout-border),
+	$border-radius: var(--callout-radius) {
+	position: relative;
+	margin: $(margin);
+	padding: $(padding);
+	border: $(border);
+	border-radius: $(border-radius);
+
+	/* Respect the padding, fool. */
+	> :first-child {
+		margin-top: 0;
+	}
+
+	> :last-child {
+		margin-bottom: 0;
+	}
+}
+
+@define-mixin foundation-callout $element {
+	$(element) {
+		/* Default background color. */
+		/* @type Color */
+		--callout-background: var(--zf-color-white, white);
+
+		/* Default fade value for callout backgrounds. */
+		/* @type Number */
+		--callout-background-fade: 15%;
+
+		/* Default border style for callouts. */
+		/* @type List */
+		--callout-border: 1px solid
+			color-mix(in srgb, var(--zf-color-black, black) 25%, transparent);
+
+		/* Default bottom margin for callouts. */
+		/* @type Number */
+		--callout-margin: 0 0 1rem 0;
+
+		/* Sizes for Callout paddings. */
+		/* @type Number */
+		--callout-size-small: 0.5rem;
+		--callout-size-default: 1rem;
+		--callout-size-large: 3rem;
+
+		/* Default font color for callouts. */
+		/* @type Color */
+		--callout-font-color: var(--zf-body-font-color, black);
+
+		/* Default font color for callouts, if the callout has a dark background. */
+		/* @type Color */
+		--callout-font-color-alt: var(--zf-body-background, white);
+
+		/* Default border radius for callouts. */
+		/* @type Color */
+		--callout-radius: var(--zf-global-radius, 0);
+
+		/* Amount to tint links used within colored panels. */
+		/* @type Number */
+		--callout-link-tint: 30%;
+
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin callout-base;
+		}
+
+		background-color: color-mix(
+			in srgb,
+			var(--callout-background) var(--callout-background-fade),
+			white
+		);
+		color: var(--callout-font-color);
+		color: color-contrast(
+			color-mix(
+					in srgb,
+					var(--callout-background) var(--callout-background-fade),
+					white
+				)
+				vs var(--callout-font-color),
+			var(--callout-font-color-alt)
+		);
+
+		&.small {
+			padding: var(--callout-size-small);
+		}
+
+		&.large {
+			padding: var(--callout-size-large);
+		}
+
+		&.primary {
+			background-color: color-mix(
+				in srgb,
+				var(--zf-color-primary) var(--callout-background-fade),
+				white
+			);
+		}
+
+		&.secondary {
+			background-color: color-mix(
+				in srgb,
+				var(--zf-color-secondary) var(--callout-background-fade),
+				white
+			);
+		}
+
+		&.success {
+			background-color: color-mix(
+				in srgb,
+				var(--zf-color-success) var(--callout-background-fade),
+				white
+			);
+		}
+
+		&.warning {
+			background-color: color-mix(
+				in srgb,
+				var(--zf-color-warning) var(--callout-background-fade),
+				white
+			);
+		}
+
+		&.alert {
+			background-color: color-mix(
+				in srgb,
+				var(--zf-color-alert) var(--callout-background-fade),
+				white
+			);
+		}
+
+		@mixin-content;
+	}
+}

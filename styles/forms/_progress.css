@@ -1,0 +1,122 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group progress-bar */
+
+@define-mixin foundation-progress-element {
+	progress {
+		/* Height of a progress bar. */
+		/* @type Number */
+		--progress-height: 1rem;
+
+		/* Background color of a progress bar. */
+		/* @type Color */
+		--progress-background: var(--zf-color-medium-gray, gray);
+
+		/* Bottom margin of a progress bar. */
+		/* @type Number */
+		--progress-margin-bottom: var(--zf-global-margin, 1rem);
+
+		/* Default color of a progress bar's meter. */
+		/* @type Color */
+		--progress-meter-background: var(--zf-color-primary, green);
+
+		/* Default radius of a progress bar. */
+		/* @type Number */
+		--progress-radius: var(--zf-global-radius, 0);
+
+		display: block;
+		width: 100%;
+		height: var(--progress-height);
+		margin-bottom: var(--progress-margin-bottom);
+		appearance: none;
+		border-radius: var(--progress-radius);
+
+		/* For Firefox */
+		border: 0;
+		background: var(--progress-background);
+
+		&::-webkit-progress-bar {
+			background: var(--progress-background);
+			border-radius: var(--progress-radius);
+		}
+
+		&::-webkit-progress-value {
+			background: var(--progress-meter-background);
+			border-radius: var(--progress-radius);
+		}
+
+		&::-moz-progress-bar {
+			background: var(--progress-meter-background);
+			border-radius: var(--progress-radius);
+		}
+
+		&.primary {
+			/* Internet Explorer sets the fill with color */
+			color: var(--zf-color-primary);
+
+			&::-webkit-progress-value {
+				background: var(--zf-color-primary);
+			}
+
+			&::-moz-progress-bar {
+				background: var(--zf-color-primary);
+			}
+		}
+		&.secondary {
+			/* Internet Explorer sets the fill with color */
+			color: var(--zf-color-secondary);
+
+			&::-webkit-progress-value {
+				background: var(--zf-color-secondary);
+			}
+
+			&::-moz-progress-bar {
+				background: var(--zf-color-secondary);
+			}
+		}
+		&.success {
+			/* Internet Explorer sets the fill with color */
+			color: var(--zf-color-success);
+
+			&::-webkit-progress-value {
+				background: var(--zf-color-success);
+			}
+
+			&::-moz-progress-bar {
+				background: var(--zf-color-success);
+			}
+		}
+		&.alert {
+			/* Internet Explorer sets the fill with color */
+			color: var(--zf-color-alert);
+
+			&::-webkit-progress-value {
+				background: var(--zf-color-alert);
+			}
+
+			&::-moz-progress-bar {
+				background: var(--zf-color-alert);
+			}
+		}
+		&.warning {
+			/* Internet Explorer sets the fill with color */
+			color: var(--zf-color-warning);
+
+			&::-webkit-progress-value {
+				background: var(--zf-color-warning);
+			}
+
+			&::-moz-progress-bar {
+				background: var(--zf-color-warning);
+			}
+		}
+
+		/* For IE and Edge */
+		&::-ms-fill {
+			border-radius: var(--progress-radius);
+			border: 0;
+		}
+	}
+}

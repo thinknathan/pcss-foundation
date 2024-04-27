@@ -1,0 +1,134 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group pagination */
+
+@define-mixin foundation-pagination $selector, $previous: -previous,
+	$next: -next {
+	$(selector) {
+		/* Font size of pagination items. */
+		/* @type Number */
+		/* 14px = 0.875rem */
+		--pagination-font-size: 0.875rem;
+
+		/* Default bottom margin of the pagination object. */
+		/* @type Number */
+		--pagination-margin-bottom: var(--zf-global-margin, 1rem);
+
+		/* Text color of pagination items. */
+		/* @type Color */
+		--pagination-item-color: var(--zf-color-black, black);
+
+		/* Padding inside of pagination items. */
+		/* @type Number */
+		/* 3px = 0.1875rem, 10px = 0.625rem */
+		--pagination-item-padding: 0.1875rem 0.625rem;
+
+		/* Right margin to separate pagination items. */
+		/* @type Number */
+		/* 1px = 0.0625rem */
+		--pagination-item-spacing: 0.0625rem;
+
+		/* Default radius for pagination items. */
+		/* @type Number */
+		--pagination-radius: var(--zf-global-radius, 0);
+
+		/* Background color of pagination items on hover. */
+		/* @type Color */
+		--pagination-item-background-hover: var(--zf-color-light-gray, gray);
+
+		/* Background color of pagination item for the current page. */
+		/* @type Color */
+		--pagination-item-background-current: var(--zf-color-primary, green);
+
+		/* Text color of the pagination item for the current page. */
+		/* @type Color */
+		--pagination-item-color-current: var(--zf-color-white, white);
+
+		/* Text color of a disabled pagination item. */
+		/* @type Color */
+		--pagination-item-color-disabled: var(--zf-color-medium-gray, gray);
+
+		/* Color of the ellipsis in a pagination menu. */
+		/* @type Color */
+		--pagination-ellipsis-color: var(--zf-color-black, black);
+
+		/* Content for the previous arrow when `var(--pagination-arrows)` is `true` */
+		/* @type String */
+		--pagination-arrow-previous: '\00AB';
+
+		/* Content for the next arrow when `var(--pagination-arrows)` is `true` */
+		/* @type String */
+		--pagination-arrow-next: '\00BB';
+
+		/* clearfix */
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin clearfix;
+		}
+
+		margin-left: 0;
+		margin-bottom: var(--pagination-margin-bottom);
+
+		/* List item */
+		li {
+			margin-right: var(--pagination-item-spacing);
+			border-radius: var(--pagination-radius);
+			font-size: var(--pagination-font-size);
+			display: inline-block;
+		}
+
+		/* Page links */
+		a,
+		button {
+			display: block;
+			padding: var(--pagination-item-padding);
+			border-radius: var(--pagination-radius);
+			color: var(--pagination-item-color);
+
+			&:hover {
+				background: var(--pagination-item-background-hover);
+			}
+		}
+
+		.current {
+			padding: var(--pagination-item-padding);
+			background: var(--pagination-item-background-current);
+			color: var(--pagination-item-color-current);
+			cursor: default;
+		}
+
+		.disabled {
+			padding: var(--pagination-item-padding);
+			color: var(--pagination-item-color-disabled);
+			cursor: not-allowed;
+
+			&:hover {
+				background: transparent;
+			}
+		}
+
+		.ellipsis::after {
+			padding: var(--pagination-item-padding);
+			content: '\2026';
+			color: var(--pagination-ellipsis-color);
+		}
+
+		@mixin-content;
+	}
+
+	$(selector)$(previous) a::before,
+	$(selector)$(previous).disabled::before {
+		display: inline-block;
+		margin-right: 0.5rem;
+		content: var(--pagination-arrow-previous);
+	}
+
+	$(selector)$(next) a::after,
+	$(selector)$(next).disabled::after {
+		display: inline-block;
+		margin-left: 0.5rem;
+		content: var(--pagination-arrow-next);
+	}
+}

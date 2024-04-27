@@ -1,0 +1,100 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group meter */
+
+@define-mixin foundation-meter-element {
+	meter {
+		/* Height of a `<meter>` element. */
+		/* @type Length */
+		--meter-height: 1rem;
+
+		/* Border radius of a `<meter>` element. */
+		/* @type Length */
+		--meter-radius: var(--zf-global-radius, 0);
+
+		/* Background color of a `<meter>` element. */
+		/* @type Color */
+		--meter-background: var(--zf-color-medium-gray, gray);
+
+		/* Meter fill for an optimal value in a `<meter>` element. */
+		/* @type Color */
+		--meter-fill-good: var(--zf-color-success, green);
+
+		/* Meter fill for an average value in a `<meter>` element. */
+		/* @type Color */
+		--meter-fill-medium: var(--zf-color-warning, orange);
+
+		/* Meter fill for a suboptimal value in a `<meter>` element. */
+		/* @type Color */
+		--meter-fill-bad: var(--zf-color-alert, red);
+
+		display: block;
+		width: 100%;
+		height: var(--meter-height);
+		margin-bottom: 1rem;
+
+		/* Disable `-webkit-appearance: none` from getting prefixed, */
+		/* We have disabled autoprefixer first and are just only using  */
+		/* `-moz-appearance: none` as a prefix and neglecting the webkit. */
+
+		/*! autoprefixer: off */
+		-moz-appearance: none;
+		appearance: none;
+
+		border-radius: var(--meter-radius);
+
+		/* For Firefox */
+		border: 0;
+		background: var(--meter-background);
+
+		/* Chrome/Safari/Edge */
+		&::-webkit-meter-bar {
+			border: 0;
+			border-radius: var(--meter-radius);
+
+			background: var(--meter-background);
+		}
+
+		&::-webkit-meter-inner-element {
+			border-radius: var(--meter-radius);
+		}
+
+		&::-webkit-meter-optimum-value {
+			background: var(--meter-fill-good);
+
+			border-radius: var(--meter-radius);
+		}
+
+		&::-webkit-meter-suboptimum-value {
+			background: var(--meter-fill-medium);
+
+			border-radius: var(--meter-radius);
+		}
+
+		&::-webkit-meter-even-less-good-value {
+			background: var(--meter-fill-bad);
+
+			border-radius: var(--meter-radius);
+		}
+
+		&::-moz-meter-bar {
+			background: var(--zf-color-primary);
+
+			border-radius: var(--meter-radius);
+		}
+
+		&:-moz-meter-optimum::-moz-meter-bar {
+			background: var(--meter-fill-good);
+		}
+
+		&:-moz-meter-sub-optimum::-moz-meter-bar {
+			background: var(--meter-fill-medium);
+		}
+
+		&:-moz-meter-sub-sub-optimum::-moz-meter-bar {
+			background: var(--meter-fill-bad);
+		}
+	}
+}

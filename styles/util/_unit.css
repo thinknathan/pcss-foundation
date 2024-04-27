@@ -1,0 +1,13 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group functions */
+
+/**
+ * @property {string} property
+ * @property {number} pixels without 'px'
+ */
+@define-mixin rem-calc $property, $pixels: 16 {
+	$(property): calc($(pixels) / 16 * 1rem);
+}

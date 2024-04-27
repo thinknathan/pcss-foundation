@@ -1,0 +1,109 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* Hide an element by default, only displaying it above a certain screen size. */
+@define-mixin show-for $size {
+	/* stylelint-disable-next-line media-query-no-invalid */
+	@media (--zf-$(size)-down) {
+		display: none !important;
+	}
+}
+
+/* Hide an element by default, only displaying it within a certain breakpoint. */
+@define-mixin show-for-only $size {
+	display: none !important;
+
+	/* stylelint-disable-next-line media-query-no-invalid */
+	@media (--zf-$(size)-only) {
+		display: initial !important;
+	}
+}
+
+/* Show an element by default, and hide it above a certain screen size. */
+@define-mixin hide-for $size {
+	/* stylelint-disable-next-line media-query-no-invalid */
+	@media (--zf-$(size)) {
+		display: none !important;
+	}
+}
+
+/* Show an element by default, and hide it above a certain screen size. */
+@define-mixin hide-for-only $size {
+	/* stylelint-disable-next-line media-query-no-invalid */
+	@media (--zf-$(size)-only) {
+		display: none !important;
+	}
+}
+
+@define-mixin foundation-visibility-classes {
+	/* Basic hiding classes */
+	.hide {
+		display: none !important;
+	}
+
+	.invisible {
+		visibility: hidden;
+	}
+	.visible {
+		visibility: visible;
+	}
+
+	/* Screen reader visibility classes */
+	/* Need a "hide-for-sr" class? Add aria-hidden='true' to the element */
+	.show-for-sr,
+	.show-on-focus {
+		@mixin element-invisible !important;
+	}
+
+	/* Only display the element when it's focused */
+	.show-on-focus {
+		&:active,
+		&:focus {
+			@mixin element-invisible-off !important;
+		}
+	}
+
+	/* Landscape and portrait visibility */
+	.show-for-landscape,
+	.hide-for-portrait {
+		display: block !important;
+
+		@media (--zf-landscape) {
+			display: block !important;
+		}
+
+		@media (--zf-portrait) {
+			display: none !important;
+		}
+	}
+
+	.hide-for-landscape,
+	.show-for-portrait {
+		display: none !important;
+
+		@media (--zf-landscape) {
+			display: none !important;
+		}
+
+		@media (--zf-portrait) {
+			display: block !important;
+		}
+	}
+
+	/* Dark Mode Visibility */
+	.show-for-dark-mode {
+		display: none;
+	}
+	.hide-for-dark-mode {
+		display: block;
+	}
+	@media screen and (prefers-color-scheme: dark) {
+		.show-for-dark-mode {
+			display: block !important;
+		}
+		.hide-for-dark-mode {
+			display: none !important;
+		}
+	}
+}

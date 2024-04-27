@@ -1,0 +1,76 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group thumbnail */
+
+@define-mixin thumbnail-link $transition: var(--thumbnail-transition),
+	$box-shadow: var(--thumbnail-shadow-hover) {
+	transition: $(transition);
+
+	&:hover,
+	&:focus {
+		box-shadow: $(box-shadow);
+	}
+
+	image {
+		box-shadow: none;
+	}
+}
+
+@define-mixin thumbnail $margin-bottom: var(--thumbnail-margin-bottom),
+	$border: var(--thumbnail-border), $border-radius: var(--thumbnail-radius),
+	$box-shadow: var(--thumbnail-shadow) {
+	display: inline-block;
+	max-width: 100%;
+	margin-bottom: $(margin-bottom);
+
+	border: $(border);
+	border-radius: $(border-radius);
+	box-shadow: $(box-shadow);
+
+	line-height: 0;
+}
+
+@define-mixin foundation-thumbnail $selector {
+	$(selector) {
+		/* Border around thumbnail images. */
+		/* @type Border */
+		--thumbnail-border: 4px solid var(--zf-color-white, white);
+
+		/* Bottom margin for thumbnail images. */
+		/* @type Length */
+		--thumbnail-margin-bottom: var(--zf-global-margin, 1rem);
+
+		/* Box shadow under thumbnail images. */
+		/* @type Shadow */
+		--thumbnail-shadow: 0 0 0 1px
+			color-mix(in srgb, var(--zf-color-black, black) 20%, transparent);
+
+		/* Box shadow under thumbnail images. */
+		/* @type Shadow */
+		--thumbnail-shadow-hover: 0 0 6px 1px
+			color-mix(in srgb, var(--zf-color-primary, green) 50%, transparent);
+
+		/* Transition proprties for thumbnail images. */ /* @type Transition */
+		--thumbnail-transition: box-shadow 200ms ease-out;
+
+		/* Default radius for thumbnail images. */
+		/* @type Number */
+		--thumbnail-radius: var(--zf-global-radius, 0);
+
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin thumbnail;
+		}
+
+		@mixin-content;
+	}
+
+	a$(selector) {
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin thumbnail-link;
+		}
+	}
+}

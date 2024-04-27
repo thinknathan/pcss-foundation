@@ -1,0 +1,101 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group badge */
+
+@define-mixin badge $min-width: var(--badge-minwidth),
+	$padding: var(--badge-padding), $font-size: var(--badge-font-size) {
+	display: inline-block;
+	min-width: $(min-width);
+	padding: $(padding);
+
+	border-radius: 50%;
+
+	font-size: $(font-size);
+	text-align: center;
+}
+
+/* Generates the base styles for a badge. */
+@define-mixin foundation-badge $element {
+	$(element) {
+		/* Default background color for badges. */
+		/* @type Color */
+		--badge-background: var(--zf-color-primary, green);
+
+		/* Default text color for badges. */
+		/* @type Color */
+		--badge-color: var(--zf-color-white, white);
+
+		/* Alternate text color for badges. */
+		/* @type Color */
+		--badge-color-alt: var(--zf-color-black, black);
+
+		/* Default padding inside badges. */
+		/* @type Number */
+		--badge-padding: 0.3em;
+
+		/* Minimum width of a badge. */
+		/* @type Number */
+		--badge-minwidth: 2.1em;
+
+		/* Default font size for badges. */
+		/* @type Number */
+		--badge-font-size: 0.6rem;
+
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin badge;
+		}
+
+		background: var(--badge-background);
+		color: var(--badge-color);
+
+		&.primary {
+			background: var(--zf-color-primary);
+			color: var(--badge-color);
+			color: color-contrast(
+				var(--zf-color-primary) vs var(--badge-color),
+				var(--badge-color-alt)
+			);
+		}
+
+		&.secondary {
+			background: var(--zf-color-secondary);
+			color: var(--badge-color);
+			color: color-contrast(
+				var(--zf-color-secondary) vs var(--badge-color),
+				var(--badge-color-alt)
+			);
+		}
+
+		&.success {
+			background: var(--zf-color-success);
+			color: var(--badge-color);
+			color: color-contrast(
+				var(--zf-color-success) vs var(--badge-color),
+				var(--badge-color-alt)
+			);
+		}
+
+		&.alert {
+			background: var(--zf-color-alert);
+			color: var(--badge-color);
+			color: color-contrast(
+				var(--zf-color-alert) vs var(--badge-color),
+				var(--badge-color-alt)
+			);
+		}
+
+		&.warning {
+			background: var(--zf-color-warning);
+			color: var(--badge-color);
+			color: color-contrast(
+				var(--zf-color-warning) vs var(--badge-color),
+				var(--badge-color-alt)
+			);
+		}
+
+		@mixin-content;
+	}
+}

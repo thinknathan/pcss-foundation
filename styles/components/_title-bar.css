@@ -1,0 +1,67 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group title-bar */
+
+@define-mixin foundation-title-bar $selector, $menu-icon-class, $left: -left,
+	$right: -right, $title: -title {
+	$(selector) {
+		/* Background color of a title bar. */
+		/* @type Color */
+		--titlebar-background: var(--zf-color-black, black);
+
+		/* Color of text inside a title bar. */
+		/* @type Color */
+		--titlebar-color: var(--zf-color-white, white);
+
+		/* Padding inside a title bar. */
+		/* @type Length */
+		--titlebar-padding: 0.5rem;
+
+		/* Font weight of text inside a title bar. */
+		/* @type Weight */
+		--titlebar-text-font-weight: bold;
+
+		/* Color of menu icons inside a title bar. */
+		/* @type Color */
+		--titlebar-icon-color: var(--zf-color-white, white);
+
+		/* Color of menu icons inside a title bar on hover. */
+		/* @type Color */
+		--titlebar-icon-color-hover: var(--zf-color-medium-gray, gray);
+
+		/* Spacing between the menu icon and text inside a title bar. */
+		/* @type Length */
+		--titlebar-icon-spacing: 0.25rem;
+
+		padding: var(--titlebar-padding);
+		background: var(--titlebar-background);
+		color: var(--titlebar-color);
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+
+		$(menu-icon-class) {
+			margin-left: var(--titlebar-icon-spacing);
+			margin-right: var(--titlebar-icon-spacing);
+		}
+
+		@mixin-content;
+	}
+
+	$(selector)$(left),
+	$(selector)$(right) {
+		flex: 1 1 0px;
+	}
+
+	$(selector)$(right) {
+		text-align: right;
+	}
+
+	$(selector)$(title) {
+		display: inline-block;
+		vertical-align: middle;
+		font-weight: var(--titlebar-text-font-weight);
+	}
+}

@@ -1,0 +1,103 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group breadcrumbs */
+
+@define-mixin breadcrumbs-container $margin: var(--breadcrumbs-margin),
+	$font-size: var(--breadcrumbs-item-font-size),
+	$color: var(--breadcrumbs-item-color-current),
+	$text-transform: var(--breadcrumbs-item-text-transform),
+	$item-margin: var(--breadcrumbs-item-margin),
+	$item-content: var(--breadcrumbs-item-separator-item),
+	$item-color: var(--breadcrumbs-item-separator-color),
+	$anchor-color: var(--breadcrumbs-item-color) {
+	& {
+		@mixin clearfix;
+	}
+
+	margin: $(margin);
+	list-style: none;
+
+	/* Item wrapper */
+	li {
+		float: left;
+		font-size: $(font-size);
+		color: $(color);
+		cursor: default;
+		text-transform: $(text-transform);
+
+		&:not(:last-child) {
+			&::after {
+				position: relative;
+				margin: 0 $(item-margin);
+				opacity: 1;
+				content: $(item-content);
+				color: $(item-color);
+			}
+		}
+	}
+
+	/* Page links */
+	a {
+		color: $(anchor-color);
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+/* Adds styles for a breadcrumbs container, along with the styles for the `<li>` and `<a>` elements inside of it. */
+@define-mixin foundation-breadcrumbs $element {
+	$(element) {
+		/* Margin around a breadcrumbs container. */
+		/* @type Number */
+		--breadcrumbs-margin: 0 0 var(--zf-global-margin, 1rem) 0;
+
+		/* Font size of breadcrumb links. */
+		/* @type Number */
+		/* 11px = 0.6875rem */
+		--breadcrumbs-item-font-size: 0.6875rem;
+
+		/* Color of breadcrumb links. */
+		/* @type Color */
+		--breadcrumbs-item-color: var(--zf-color-primary, green);
+
+		/* Color of the active breadcrumb link. */
+		/* @type Color */
+		--breadcrumbs-item-color-current: var(--zf-color-black, black);
+
+		/* Opacity of disabled breadcrumb links. */
+		/* @type Number */
+		--breadcrumbs-item-color-disabled: var(--zf-color-medium-gray, gray);
+
+		/* Margin between breadcrumb items. */
+		/* @type Number */
+		--breadcrumbs-item-margin: 0.75rem;
+
+		/* Whether to uppercase the breadcrumb text. */
+		/* @type String */
+		--breadcrumbs-item-text-transform: uppercase;
+
+		/* Used character for the breadcrumb separator. */
+		/* @type Content */
+		--breadcrumbs-item-separator-item: '/';
+
+		/* Color of breadcrumb item. */
+		/* @type Color */
+		--breadcrumbs-item-separator-color: var(--zf-color-medium-gray, gray);
+
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin breadcrumbs-container;
+		}
+
+		.disabled {
+			color: var(--breadcrumbs-item-color-disabled);
+			cursor: not-allowed;
+		}
+
+		@mixin-content;
+	}
+}

@@ -1,0 +1,202 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group global */
+
+@define-mixin foundation-global-styles {
+	@mixin foundation-normalize;
+
+	:root {
+		/* Font size attribute applied to `<html>` and `<body>`. We use 100% by default so the value is inherited from the user's browser settings. */
+		/* @type Number */
+		--zf-global-font-size: 100%;
+
+		/* Global width of your site. Used by the grid to determine row width. */
+		/* @type Number */
+		/* 1200px = 75rem */
+		--zf-global-width: 75rem;
+
+		/* Default line height for all type. `var(--zf-global-lineheight)` is 24px while `var(--zf-global-font-size)` is 16px */
+		/* @type Number */
+		--zf-global-lineheight: 1.5;
+
+		/* Colors used for buttons, callouts, links, etc. There must always be a color called `primary`. */
+		--zf-color-primary: #1779ba;
+		--zf-color-secondary: #767676;
+		--zf-color-success: #3adb76;
+		--zf-color-warning: #ffae00;
+		--zf-color-alert: #cc4b37;
+
+		/* Color used for light gray UI items. */
+		/* @type Color */
+		--zf-color-light-gray: #e6e6e6;
+
+		/* Color used for medium gray UI items. */
+		/* @type Color */
+		--zf-color-medium-gray: #cacaca;
+
+		/* Color used for dark gray UI items. */
+		/* @type Color */
+		--zf-color-dark-gray: #8a8a8a;
+
+		/* Color used for black ui items. */
+		/* @type Color */
+		--zf-color-black: #0a0a0a;
+
+		/* Color used for white ui items. */
+		/* @type Color */
+		--zf-color-white: #fefefe;
+
+		/* Background color of the body. */
+		/* @type Color */
+		--zf-body-background: var(--zf-color-white, white);
+
+		/* Text color of the body. */
+		/* @type Color */
+		--zf-body-font-color: var(--zf-color-black, black);
+
+		/* Font stack of the body. */
+		/* @type List */
+		--zf-body-font-family: 'Helvetica Neue', Helvetica, Roboto, Arial,
+			sans-serif;
+
+		/* Global value used for margin on components. */
+		/* @type Number */
+		--zf-global-margin: 1rem;
+
+		/* Global value used for padding on components. */
+		/* @type Number */
+		--zf-global-padding: 1rem;
+
+		/* Global font weight used for normal type. */
+		/* @type Keyword | Number */
+		--zf-global-weight-normal: normal;
+
+		/* Global font weight used for bold type. */
+		/* @type Keyword | Number */
+		--zf-global-weight-bold: bold;
+
+		/* Global value used for all elements that have a border radius. */
+		/* @type Number */
+		--zf-global-radius: 0;
+
+		/* Global value used for all menu styles. Can be overwritten at individual menu component level. */
+		/* @type Number */
+		--zf-global-menu-padding: 0.7rem 1rem;
+
+		/* Global value used for all menu styles. Nested margin for submenu. */
+		--zf-global-menu-nested-margin: 1rem;
+
+		/* Button cursor's value, `auto` by default */
+		/* @type Keyword */
+		--zf-global-button-cursor: auto;
+
+		/* Global spacing for form elements. */
+		/* @type Number */
+		/* 16px = 1rem */
+		--zf-form-spacing: 1rem;
+	}
+
+	html {
+		box-sizing: border-box;
+		font-size: var(--zf-global-font-size);
+	}
+
+	/* Set box-sizing globally to handle padding and border widths */
+	*,
+	*::before,
+	*::after {
+		box-sizing: inherit;
+	}
+
+	/* Default body styles */
+	body {
+		margin: 0;
+		padding: 0;
+
+		/* using environment variables to account for non-rectangular displays e.g. phones with notches */
+		padding: env(safe-area-inset-top) env(safe-area-inset-right)
+			env(safe-area-inset-bottom) env(safe-area-inset-left);
+
+		background: var(--zf-body-background);
+
+		font-family: var(--body-font-family);
+		font-weight: var(--zf-global-weight-normal);
+		line-height: var(--zf-global-lineheight);
+		color: var(--zf-body-font-color);
+
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	img {
+		/* Get rid of gap under images by making them display: inline-block; by default */
+		display: inline-block;
+		vertical-align: middle;
+
+		/* Grid defaults to get images and embeds to work properly */
+		max-width: 100%;
+		height: auto;
+		-ms-interpolation-mode: bicubic;
+	}
+
+	/* Make sure textarea takes on height automatically */
+	textarea {
+		height: auto;
+		min-height: 50px;
+		border-radius: var(--zf-global-radius);
+	}
+
+	/* Make select elements are 100% width by default */
+	select {
+		box-sizing: border-box;
+		width: 100%;
+		border-radius: var(--zf-global-radius);
+	}
+
+	/* Styles Google Maps and MapQuest embeds properly */
+	.map_canvas,
+	.mqa-display {
+		img,
+		embed,
+		object {
+			max-width: none !important;
+		}
+	}
+
+	/* Reset <button> styles created by most browsers */
+	button {
+		padding: 0;
+		appearance: none;
+		border: 0;
+		border-radius: var(--zf-global-radius);
+		background: transparent;
+		line-height: 1;
+		cursor: var(--zf-global-button-cursor);
+	}
+
+	/* Prevent text overflow on pre */
+	pre {
+		overflow: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	/* Make reset inherit font-family instead of settings sans-serif */
+	button,
+	input,
+	optgroup,
+	select,
+	textarea {
+		font-family: inherit;
+	}
+
+	/* Internal classes to show/hide elements in JavaScript */
+	.is-visible {
+		display: block !important;
+	}
+
+	.is-hidden {
+		display: none !important;
+	}
+}

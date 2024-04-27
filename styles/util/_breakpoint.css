@@ -1,0 +1,35 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group breakpoints */
+
+@define-mixin foundation-breakpoint $small: 39.9375em, $medium: 40em,
+	$large: 64em, $xlarge: 75em, $xxlarge: 90em, $xxxlarge: 105em {
+	@custom-media --zf-small-only (width < $(medium));
+	@custom-media --zf-medium-only ($(medium) <= width < $(large));
+	@custom-media --zf-large-only ($(large) <= width < $(xlarge));
+	@custom-media --zf-xlarge-only ($(xlarge) <= width < $(xxlarge));
+	@custom-media --zf-xxlarge-only ($(xxlarge) <= width < $(xxxlarge));
+
+	@custom-media --zf-small (width < $(medium));
+	@custom-media --zf-medium (width >= $(medium));
+	@custom-media --zf-large (width >= $(large));
+	@custom-media --zf-xlarge (width >= $(xlarge));
+	@custom-media --zf-xxlarge (width >= $(xxlarge));
+
+	@custom-media --zf-small-down (width < $(medium));
+	@custom-media --zf-medium-down (width < $(large));
+	@custom-media --zf-large-down (width < $(xlarge));
+	@custom-media --zf-xlarge-down (width < $(xxlarge));
+	@custom-media --zf-xxlarge-down (width < $(xxxlarge));
+
+	@custom-media --zf-landscape (orientation: landscape);
+	@custom-media --zf-portrait (orientation: portrait);
+
+	@custom-media --zf-hidpi-1 (min-device-pixel-ratio: 1);
+	@custom-media --zf-hidpi-1-5 (min-device-pixel-ratio: 1.5);
+	@custom-media --zf-hidpi-2 (min-device-pixel-ratio: 2);
+	@custom-media --zf-retina (min-device-pixel-ratio: 2);
+	@custom-media --zf-hidpi-3 (min-device-pixel-ratio: 3);
+}

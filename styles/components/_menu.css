@@ -1,0 +1,332 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group menu */
+
+@define-mixin menu-base $anchor-padding: var(--menu-items-padding) {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+
+	a,
+	.button {
+		line-height: 1;
+		text-decoration: none;
+		display: block;
+		padding: $(anchor-padding);
+	}
+
+	/* Reset styles of inner elements */
+	input,
+	select,
+	a,
+	button {
+		margin-bottom: 0;
+	}
+
+	input {
+		display: inline-block;
+	}
+}
+
+/* Expands the items of a Menu, so each item is the same width. */
+@define-mixin menu-expand {
+	li {
+		flex: 1 1 0px;
+	}
+}
+
+/* Align menu items. */
+@define-mixin menu-align-left {
+	justify-content: flex-start;
+}
+@define-mixin menu-align-center {
+	li {
+		display: flex;
+		justify-content: center;
+
+		.submenu li {
+			justify-content: flex-start;
+		}
+	}
+}
+@define-mixin menu-align-right {
+	li {
+		display: flex;
+		justify-content: flex-end;
+
+		.submenu li {
+			justify-content: flex-start;
+		}
+	}
+
+	&.vertical li {
+		display: block;
+		text-align: right;
+
+		.submenu li {
+			text-align: right;
+		}
+	}
+}
+
+/* Sets the direction of a Menu. */
+@define-mixin menu-direction-horizontal {
+	flex-flow: row wrap;
+}
+@define-mixin menu-direction-vertical {
+	flex-flow: column nowrap;
+}
+
+/* Adds styles for a nested Menu, by adding `margin-left` to the menu. */
+@define-mixin menu-nested {
+	margin-right: 0;
+	margin-left: var(--menu-nested-margin);
+}
+@define-mixin menu-nested-right {
+	margin-right: var(--menu-nested-margin);
+	margin-left: 0;
+}
+
+/* Align top/bottom icons within a menu. */
+@define-mixin menu-icon-alignment-left {
+	&.icon-top,
+	&.icon-bottom {
+		li a {
+			img,
+			i,
+			svg {
+				text-align: left;
+			}
+		}
+	}
+}
+@define-mixin menu-icon-alignment-right {
+	&.icon-top,
+	&.icon-bottom {
+		li a {
+			img,
+			i,
+			svg {
+				text-align: right;
+			}
+		}
+	}
+}
+@define-mixin menu-icon-alignment {
+	&.icon-top,
+	&.icon-bottom {
+		li a {
+			img,
+			i,
+			svg {
+				text-align: center;
+			}
+		}
+	}
+}
+
+/* Adds position classes for icons within a menu. */
+@define-mixin menu-icon-position-left {
+	li a {
+		flex-flow: row nowrap;
+
+		img,
+		i,
+		svg {
+			margin-right: var(--menu-icon-spacing);
+		}
+	}
+}
+@define-mixin menu-icon-position-top {
+	li a {
+		flex-flow: column nowrap;
+
+		img,
+		i,
+		svg {
+			align-self: stretch;
+			margin-bottom: var(--menu-icon-spacing);
+			text-align: center;
+		}
+	}
+}
+@define-mixin menu-icon-position-bottom {
+	li a {
+		flex-flow: column nowrap;
+
+		img,
+		i,
+		svg {
+			align-self: stretch;
+			margin-bottom: var(--menu-icon-spacing);
+			text-align: center;
+		}
+	}
+}
+@define-mixin menu-icon-position-right {
+	li a {
+		flex-flow: row nowrap;
+
+		img,
+		i,
+		svg {
+			margin-left: var(--menu-icon-spacing);
+		}
+	}
+}
+
+@define-mixin foundation-menu $selector {
+	$(selector) {
+		/* Margin of a menu. */
+		/* @type Number */
+		--menu-margin: 0;
+
+		/* Left-hand margin of a nested menu. */
+		/* @type Number */
+		--menu-nested-margin: var(--zf-global-menu-nested-margin, 1rem);
+
+		/* Padding for items in a pill menu. */
+		/* @type Number */
+		--menu-items-padding: var(--zf-global-menu-padding, 0.7rem 1rem);
+
+		/* margin for items in a simple menu. */
+		/* @type Number */
+		--menu-simple-margin: 1rem;
+
+		/* Text color of an active menu item. */
+		/* @type Color */
+		--menu-item-color-active: var(--zf-color-white, white);
+
+		/* Alternative text color of an active menu item.. */
+		/* @type Color */
+		--menu-item-color-alt-active: var(--zf-color-black, black);
+
+		/* Background color of an active menu item. */
+		/* @type Color */
+		--menu-item-background-active: var(--zf-color-primary, green);
+
+		/* Spacing between an icon and text in a menu item. */
+		/* @type Number */
+		--menu-icon-spacing: 0.25rem;
+
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin menu-base;
+		}
+
+		/* Default orientation: horizontal */
+		&,
+		&.horizontal {
+			@mixin menu-direction-horizontal;
+		}
+
+		/* Vertical orientation modifier */
+		&.vertical {
+			@mixin menu-direction-vertical;
+			@mixin menu-icon-alignment-left;
+		}
+
+		/* Even-width modifier for horizontal orientation */
+		&.expanded {
+			li {
+				flex: 1 1 0px;
+			}
+			@mixin menu-icon-alignment-left;
+		}
+
+		/* Simple */
+		&.simple {
+			align-items: center;
+
+			li + li {
+				margin-left: var(--menu-simple-margin);
+			}
+
+			a {
+				padding: 0;
+			}
+		}
+
+		/* Nesting */
+		&.nested {
+			@mixin menu-nested;
+		}
+
+		/* Icon Base Styles */
+		&.icons {
+			a {
+				display: flex;
+			}
+		}
+
+		/* Menu icon position */
+		/* Includes specificity to nested icons with a different position */
+		&,
+		&.nested {
+			/* Icon Left */
+			&.icon-left {
+				@mixin menu-icon-position-left;
+			}
+
+			/* Icon Right */
+			&.icon-right {
+				@mixin menu-icon-position-right;
+			}
+
+			/* Icon Top */
+			&.icon-top {
+				@mixin menu-icon-position-top;
+			}
+
+			/* Icon Bottom */
+			&.icon-bottom {
+				@mixin menu-icon-position-bottom;
+			}
+		}
+
+		/* Active state */
+		.is-active > a {
+			background: var(--menu-item-background-active);
+			color: var(--menu-item-color-active);
+			color: color-contrast(
+				var(--menu-item-background-active) vs var(--menu-item-color-active),
+				var(--menu-item-color-alt-active)
+			);
+		}
+
+		/* Align left */
+		&.align-left {
+			@mixin menu-align-left;
+		}
+
+		/* Align right */
+		&.align-right {
+			@mixin menu-align-right;
+			@mixin menu-icon-alignment-right;
+
+			.nested {
+				@mixin menu-nested-right;
+			}
+		}
+
+		/* Align center */
+		&.align-center {
+			@mixin menu-align-center;
+		}
+
+		.menu-text {
+			padding: var(--zf-global-menu-padding);
+
+			font-weight: bold;
+			line-height: 1;
+			color: inherit;
+		}
+
+		@mixin-content;
+	}
+}

@@ -1,0 +1,123 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group media-object */
+
+@define-mixin media-object-container $margin-bottom:
+	var(--mediaobject-margin-bottom) {
+	display: flex;
+	margin-bottom: $(margin-bottom);
+	flex-wrap: nowrap;
+
+	img {
+		max-width: none;
+	}
+}
+
+@define-mixin media-object-section $section-padding:
+	var(--mediaobject-section-padding) {
+	flex: 0 1 auto;
+
+	&:first-child {
+		padding-right: $(section-padding);
+	}
+
+	&:last-child:not(:nth-child(2)) {
+		padding-left: $(section-padding);
+	}
+
+	> :last-child {
+		margin-bottom: 0;
+	}
+}
+
+@define-mixin foundation-media-object $selector, $section: -section {
+	$(selector) {
+		/* Bottom margin of a media object. */
+		/* @type Number */
+		--mediaobject-margin-bottom: var(--zf-global-margin, 1rem);
+
+		/* Left and right padding on sections within a media object. */
+		/* @type Number */
+		--mediaobject-section-padding: var(--zf-global-padding, 1rem);
+
+		/* Width of images within a media object, when the object is stacked vertically. Set to 'auto' to use the image's natural width. */
+		/* @type Number */
+		--mediaobject-image-width-stacked: 100%;
+
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin media-object-container;
+		}
+
+		&.stack-for-small {
+			@media (--zf-small-down) {
+				flex-wrap: wrap;
+			}
+		}
+		&.stack-for-medium {
+			@media (--zf-medium-down) {
+				flex-wrap: wrap;
+			}
+		}
+		&.stack-for-large {
+			@media (--zf-large-down) {
+				flex-wrap: wrap;
+			}
+		}
+
+		@mixin-content;
+	}
+
+	$(selector)$(section) {
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin media-object-section;
+		}
+
+		.stack-for-small & {
+			@media (--zf-small-down) {
+				padding: 0;
+				padding-bottom: var(--mediaobject-section-padding);
+
+				flex-basis: 100%;
+				max-width: 100%;
+
+				img {
+					width: var(--mediaobject-image-width-stacked);
+				}
+			}
+		}
+		.stack-for-medium & {
+			@media (--zf-medium-down) {
+				padding: 0;
+				padding-bottom: var(--mediaobject-section-padding);
+
+				flex-basis: 100%;
+				max-width: 100%;
+
+				img {
+					width: var(--mediaobject-image-width-stacked);
+				}
+			}
+		}
+		.stack-for-large & {
+			@media (--zf-large-down) {
+				padding: 0;
+				padding-bottom: var(--mediaobject-section-padding);
+
+				flex-basis: 100%;
+				max-width: 100%;
+
+				img {
+					width: var(--mediaobject-image-width-stacked);
+				}
+			}
+		}
+
+		&.main$(section) {
+			flex: 1 1 0px;
+		}
+	}
+}

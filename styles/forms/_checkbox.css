@@ -1,0 +1,39 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group forms */
+
+@define-mixin foundation-form-checkbox {
+	[type='file'],
+	[type='checkbox'],
+	[type='radio'] {
+		margin: 0 0 var(--zf-form-spacing);
+	}
+
+	/* Styles for input/label siblings */
+	[type='checkbox'] + label,
+	[type='radio'] + label {
+		display: inline-block;
+		vertical-align: baseline;
+
+		margin-left: calc(var(--zf-form-spacing) * 0.5);
+		margin-right: var(--zf-form-spacing);
+		margin-bottom: 0;
+
+		&[for] {
+			cursor: pointer;
+		}
+	}
+
+	/* Styles for inputs inside labels */
+	label > [type='checkbox'],
+	label > [type='radio'] {
+		margin-right: calc(var(--zf-form-spacing) * 0.5);
+	}
+
+	/* Normalize file input width */
+	[type='file'] {
+		width: 100%;
+	}
+}

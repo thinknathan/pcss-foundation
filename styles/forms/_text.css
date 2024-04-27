@@ -1,0 +1,166 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group forms */
+
+@define-mixin form-element {
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	/* TO-DO: What if --input-padding is a multi-value? */
+	height: calc(
+		(var(--input-font-size) * var(--input-line-height)) +
+			(var(--input-padding) + var(--input-padding)) - 0.0625rem
+	);
+	margin: 0 0 var(--zf-form-spacing);
+	padding: var(--input-padding);
+	border: var(--input-border);
+	border-radius: var(--input-radius);
+	background-color: var(--input-background);
+	box-shadow: var(--input-shadow);
+	font-family: var(--input-font-family);
+	font-size: var(--input-font-size);
+	font-weight: var(--input-font-weight);
+	line-height: var(--input-line-height);
+	color: var(--input-color);
+	transition: var(--input-transition);
+
+	/* Focus state */
+	&:focus {
+		outline: none;
+		border: var(--input-border-focus);
+		background-color: var(--input-background-focus);
+		box-shadow: var(--input-shadow-focus);
+		transition: var(--input-transition);
+	}
+}
+
+@define-mixin foundation-form-text {
+	:root {
+		/* Font color of text inputs. */
+		/* @type Color */
+		--input-color: var(--zf-color-black, black);
+
+		/* Font color of placeholder text within text inputs. */
+		/* @type Color */
+		--input-placeholder-color: var(--zf-color-medium-gray, gray);
+
+		/* Font family of text inputs. */
+		/* @type Font */
+		--input-font-family: inherit;
+
+		/* Font size of text inputs. */
+		/* @type Number */
+		/* 16px = 1rem */
+		--input-font-size: 1rem;
+
+		/* Font weight of text inputs. */
+		/* @type Keyword */
+		--input-font-weight: var(--zf-global-weight-normal, normal);
+
+		/* Line height of text inputs. */
+		/* @type Keyword */
+		--input-line-height: var(--zf-global-lineheight, 1.5);
+
+		/* Background color of text inputs. */
+		/* @type Color */
+		--input-background: var(--zf-color-white, white);
+
+		/* Background color of focused of text inputs. */
+		/* @type Color */
+		--input-background-focus: var(--zf-color-white, white);
+
+		/* Background color of disabled text inputs. */
+		/* @type Color */
+		--input-background-disabled: var(--zf-color-light-gray, gray);
+
+		/* Border around text inputs. */
+		/* @type Border */
+		--input-border: 1px solid var(--zf-color-medium-gray, gray);
+
+		/* Border around focused text inputs. */
+		/* @type Color */
+		--input-border-focus: 1px solid var(--zf-color-dark-gray, gray);
+
+		/* Padding of text inputs. */
+		/* @type Color */
+		--input-padding: calc(var(--zf-form-spacing) * 0.5);
+
+		/* Box shadow inside text inputs when not focused. */
+		/* @type Shadow */
+		--input-shadow: inset 0 1px 2px
+			color-mix(in srgb, var(--zf-color-black, black) 10%, transparent);
+
+		/* Box shadow outside text inputs when focused. */
+		/* @type Shadow */
+		--input-shadow-focus: 0 0 5px var(--zf-color-medium-gray, gray);
+
+		/* Cursor to use when hovering over a disabled text input. */
+		/* @type Cursor */
+		--input-cursor-disabled: not-allowed;
+
+		/* Properties to transition on text inputs. */
+		/* @type Transition */
+		--input-transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
+
+		/* Radius for text inputs. */
+		/* @type Border */
+		--input-radius: var(--zf-global-radius, 0);
+
+		/* Border radius for form buttons, defaulted to global-radius. */
+		/* @type Number */
+		--form-button-radius: var(--zf-global-radius, 0);
+	}
+
+	/* Text inputs */
+	input[type='text'],
+	input[type='password'],
+	input[type='date'],
+	input[type='datetime'],
+	input[type='datetime-local'],
+	input[type='month'],
+	input[type='week'],
+	input[type='email'],
+	input[type='number'],
+	input[type='search'],
+	input[type='tel'],
+	input[type='time'],
+	input[type='url'],
+	input[type='color'],
+	textarea {
+		@mixin form-element;
+		appearance: none;
+	}
+
+	/* Text areas */
+	textarea {
+		max-width: 100%;
+
+		&[rows] {
+			height: auto;
+		}
+	}
+
+	input,
+	textarea {
+		/* Disabled/readonly state */
+		&:disabled,
+		&[readonly] {
+			background-color: var(--input-background-disabled);
+			cursor: var(--input-cursor-disabled);
+		}
+	}
+
+	/* Reset styles on button-like inputs */
+	[type='submit'],
+	[type='button'] {
+		appearance: none;
+		border-radius: var(--form-button-radius);
+	}
+
+	/* Reset Normalize setting content-box to search elements */
+	input[type='search'] {
+		box-sizing: border-box;
+	}
+}

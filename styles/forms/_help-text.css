@@ -1,0 +1,29 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group forms */
+
+@define-mixin foundation-form-helptext {
+	.help-text {
+		/* Default color for help text. */
+		/* @type Color */
+		--helptext-color: var(--zf-color-black, black);
+
+		/* Default font size for help text. */
+		/* @type Number */
+		/* 13px = 0.8125rem */
+		--helptext-font-size: 0.8125rem;
+
+		/* Default font style for help text. */
+		/* @type Keyword */
+		--helptext-font-style: italic;
+
+		margin-top: calc(var(--zf-form-spacing) * -0.5);
+		font-size: var(--helptext-font-size);
+		font-style: var(--helptext-font-style);
+		color: var(--helptext-color);
+
+		@mixin-content;
+	}
+}

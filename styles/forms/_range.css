@@ -1,0 +1,106 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group slider */
+
+@define-mixin foundation-range-input {
+	input[type='range'] {
+		/* Default height of the slider. */
+		/* @type Number */
+		--slider-height: 0.5rem;
+
+		/* Default background color of the slider's track. */
+		/* @type Color */
+		--slider-background: var(--zf-color-light-gray, gray);
+
+		/* Default color of the active fill color of the slider. */
+		/* @type Color */
+		--slider-fill-background: var(--zf-color-medium-gray, gray);
+
+		/* Default height of the handle of the slider. */
+		/* @type Number */
+		--slider-handle-height: 1.4rem;
+
+		/* Default width of the handle of the slider. */
+		/* @type Number */
+		--slider-handle-width: 1.4rem;
+
+		/* Default color of the handle for the slider. */
+		/* @type Color */
+		--slider-handle-background: var(--zf-color-primary, green);
+
+		/* Default fade amount of a disabled slider. */
+		/* @type Number */
+		--slider-opacity-disabled: 0.25;
+
+		/* Default radius for slider. */
+		/* @type Number */
+		--slider-radius: var(--zf-global-radius, 0);
+
+		display: block;
+		width: 100%;
+		height: auto;
+		margin-top: calc(
+			(var(--slider-handle-height) - var(--slider-height)) * 0.5
+		);
+		margin-bottom: calc(
+			(var(--slider-handle-height) - var(--slider-height)) * 0.5
+		);
+		appearance: none;
+		border: 0;
+		line-height: 1;
+		cursor: pointer;
+		border-radius: var(--slider-radius);
+
+		&:focus {
+			outline: 0;
+		}
+
+		&[disabled] {
+			opacity: var(--slider-opacity-disabled);
+		}
+
+		/* Chrome/Safari */
+		&::-webkit-slider-runnable-track {
+			height: var(--slider-height);
+			background: var(--slider-background);
+		}
+
+		&::-webkit-slider-thumb {
+			width: var(--slider-handle-width);
+			height: var(--slider-handle-height);
+			margin-top: calc(
+				(var(--slider-handle-height) - var(--slider-height)) * -0.5
+			);
+			-webkit-appearance: none;
+			background: var(--slider-handle-background);
+			border-radius: var(--slider-radius);
+		}
+
+		/* Firefox */
+		&::-moz-range-track {
+			height: var(--slider-height);
+			-moz-appearance: none;
+			background: var(--slider-background);
+		}
+
+		&::-moz-range-thumb {
+			width: var(--slider-handle-width);
+			height: var(--slider-handle-height);
+			margin-top: calc(
+				(var(--slider-handle-height) - var(--slider-height)) * -0.5
+			);
+
+			-moz-appearance: none;
+			background: var(--slider-handle-background);
+			border-radius: var(--slider-radius);
+		}
+
+		output {
+			vertical-align: middle;
+			margin-left: 0.5em;
+			line-height: var(--slider-handle-height);
+		}
+	}
+}

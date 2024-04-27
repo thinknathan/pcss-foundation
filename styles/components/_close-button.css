@@ -1,0 +1,77 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group close-button */
+
+@define-mixin close-button $color: var(--closebutton-color),
+	$z-index: var(--closebutton-z-index),
+	$hover-color: var(--closebutton-color-hover) {
+	position: absolute;
+	z-index: $(z-index);
+	color: $(color);
+	cursor: pointer;
+
+	&:hover,
+	&:focus {
+		color: $(hover-color);
+	}
+}
+
+@define-mixin foundation-close-button $selector {
+	$(selector) {
+		/* Default position of the close button. The first value should be `right` or `left`, and the second value should be `top` or `bottom`. */
+		/* @type List */
+		--closebutton-position: right top;
+
+		/* Default z-index for a close button. */
+		/* @type Number */
+		--closebutton-z-index: 10;
+
+		/* Right (or left) offset(s) for a close button. */
+		/* @type Number */
+		--closebutton-offset-horizontal-small: 0.66rem;
+		--closebutton-offset-horizontal-medium: 1rem;
+
+		/* Top (or bottom) offset(s) for a close button. */
+		/* @type Number */
+		--closebutton-offset-vertical-small: 0.33em;
+		--closebutton-offset-vertical-medium: 0.5rem;
+
+		/* Size(s) of the close button. Used to generate sizing modifiers. */
+		/* @type Number */
+		--closebutton-size-small: 1.5em;
+		--closebutton-size-medium: 2em;
+
+		/* The line-height of the close button. It affects the spacing of the element. */
+		/* @type Number */
+		--closebutton-lineheight: 1;
+
+		/* Default color of the close button. */
+		/* @type Color */
+		--closebutton-color: var(--zf-color-dark-gray, gray);
+
+		/* Default color of the close button when being hovered on. */
+		/* @type Color */
+		--closebutton-color-hover: var(--zf-color-black, black);
+
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin close-button;
+		}
+
+		right: var(--closebutton-offset-horizontal-medium);
+		top: var(--closebutton-offset-vertical-medium);
+		font-size: var(--closebutton-size-medium);
+		line-height: 1;
+
+		&.small {
+			right: var(--closebutton-offset-horizontal-small);
+			top: var(--closebutton-offset-vertical-small);
+			font-size: var(--closebutton-size-small);
+			line-height: 1;
+		}
+
+		@mixin-content;
+	}
+}

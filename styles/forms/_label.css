@@ -1,0 +1,46 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group forms */
+
+@define-mixin foundation-form-label {
+	label {
+		/* Color for form labels. */
+		/* @type Color */
+		--form-label-color: var(--zf-color-black, black);
+
+		/* Font size for form labels. */
+		/* @type Number */
+		/* 14px = 0.875rem */
+		--form-label-font-size: 0.875rem;
+
+		/* Font weight for form labels. */
+		/* @type Keyword */
+		--form-label-font-weight: var(--zf-global-weight-normal, normal);
+
+		/* Line height for form labels. The higher the number, the more space between the label and its input field. */
+		/* @type Number */
+		--form-label-line-height: 1.8;
+
+		/* @type Number */
+		/* 1px = 0.0625rem */
+		--form-input-border-width: 0.0625rem;
+
+		display: block;
+		margin: 0;
+		font-size: var(--form-label-font-size);
+		font-weight: var(--form-label-font-weight);
+		line-height: var(--form-label-line-height);
+		color: var(--form-label-color);
+
+		&.middle {
+			margin: 0 0 var(--zf-form-spacing);
+			line-height: var(--zf-global-lineheight);
+			padding: calc(
+					var(--zf-form-spacing) * 0.5 + var(--form-input-border-width)
+				)
+				0;
+		}
+	}
+}

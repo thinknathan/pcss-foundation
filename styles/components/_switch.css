@@ -1,0 +1,261 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group switch */
+
+@define-mixin switch-container $margin-bottom: var(--switch-margin),
+	$color: var(--zf-color-white), $height: var(--switch-height) {
+	position: relative;
+	margin-bottom: $(margin-bottom);
+	outline: 0;
+
+	/* These properties cascade down to the switch text */
+	@mixin rem-calc font-size, 14;
+	font-weight: bold;
+	color: $(color);
+
+	user-select: none;
+	height: $(height);
+}
+
+@define-mixin switch-input {
+	position: absolute;
+	margin-bottom: 0;
+	opacity: 0;
+}
+
+@define-mixin switch-paddle $height: var(--switch-height),
+	$border-radius: var(--switch-radius), $background: var(--switch-background),
+	$transition: var(--switch-paddle-transition),
+	$offset: var(--switch-paddle-offset),
+	$paddle-radius: var(--switch-paddle-radius),
+	$paddle-background: var(--switch-paddle-background),
+	$paddle-background-active: var(--switch-background-active),
+	$disabled-cursor: var(--switch-cursor-disabled),
+	$disabled-opacity: var(--switch-opacity-disabled) {
+	position: relative;
+	display: block;
+	width: calc($(height) * 2);
+	height: $(height);
+
+	border-radius: $(border-radius);
+	background: $(background);
+	transition: $(transition);
+
+	/* Resetting these <label> presets so type styles cascade down */
+	font-weight: inherit;
+	color: inherit;
+
+	cursor: pointer;
+
+	/* Needed to override specificity */
+	input + & {
+		margin: 0;
+	}
+
+	/* The paddle itself */
+	&::after {
+		position: absolute;
+		top: $(offset);
+		left: $(offset);
+
+		display: block;
+		width: calc($(height) - ($(offset) * 2));
+		height: calc($(height) - ($(offset) * 2));
+
+		transform: translate3d(0, 0, 0);
+		border-radius: $(paddle-radius);
+		background: $(paddle-background);
+		transition: $(transition);
+		content: '';
+	}
+
+	/* Change the visual style when the switch is active */
+	input:checked ~ & {
+		background: $(paddle-background-active);
+
+		&::after {
+			/* left: calc($(height) * 2 - $(height) - $(offset) * 2 - $(offset)); */
+			transform: translateX(calc($(height)));
+		}
+	}
+
+	/* Indicate a disabled switch */
+	input:disabled ~ & {
+		cursor: $(disabled-cursor);
+		opacity: $(disabled-opacity);
+	}
+}
+
+/* Changes the size of a switch by modifying the size of the body and paddle. Apply this to a switch container. */
+@define-mixin switch-size $font-size: 1rem, $switch-height: 2rem,
+	$paddle-offset: 0.25rem {
+	height: $(switch-height);
+
+	.switch-paddle {
+		width: calc($(switch-height) * 2);
+		height: $(switch-height);
+		font-size: $(font-size);
+	}
+
+	.switch-paddle::after {
+		top: $(paddle-offset);
+		left: $(paddle-offset);
+		width: calc($(switch-height) - $(paddle-offset) * 2);
+		height: calc($(switch-height) - $(paddle-offset) * 2);
+	}
+
+	input:checked ~ .switch-paddle::after {
+		/* left: calc(
+			$(switch-height) * 2 - $(switch-height) - $(paddle-offset) * 2 -
+				$(paddle-offset)
+		); */
+		transform: translateX(calc($(switch-height)));
+	}
+}
+
+@define-mixin switch-text {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+@define-mixin switch-text-active {
+	left: 8%;
+	display: none;
+
+	input:checked + label > & {
+		display: block;
+	}
+}
+
+@define-mixin switch-text-inactive {
+	right: 15%;
+
+	input:checked + label > & {
+		display: none;
+	}
+}
+
+@define-mixin foundation-switch $selector, $input: -input, $paddle: -paddle,
+	$active: -active, $inactive: -inactive {
+	/* Container class */
+	$(selector) {
+		/* Background color of a switch. */
+		/* @type Color */
+		--switch-background: var(--zf-color-medium-gray, gray);
+
+		/* Background active color of a switch. */
+		/* @type Color */
+		--switch-background-active: var(--zf-color-primary, green);
+
+		/* Height of a switch, with no class applied. */
+		/* @type Number */
+		--switch-height: 2rem;
+
+		/* Height of a switch with .tiny class. */
+		/* @type Number */
+		--switch-height-tiny: 1.5rem;
+
+		/* Height of a switch with .small class. */
+		/* @type Number */
+		--switch-height-small: 1.75rem;
+
+		/* Height of a switch with .large class. */
+		/* @type Number */
+		--switch-height-large: 2.5rem;
+
+		/* Border radius of the switch */
+		/* @type Number */
+		--switch-radius: var(--zf-global-radius, 0);
+
+		/* border around a modal. */
+		/* @type Number */
+		--switch-margin: var(--zf-global-margin, 1rem);
+
+		/* Background color for the switch container and paddle. */
+		/* @type Color */
+		--switch-paddle-background: var(--zf-color-white, white);
+
+		/* Spacing between a switch paddle and the edge of the body. */
+		/* @type Number */
+		--switch-paddle-offset: 0.25rem;
+
+		/* border radius of the switch paddle */
+		/* @type Number */
+		--switch-paddle-radius: var(--zf-global-radius, 0);
+
+		/* switch transition. */
+		/* @type Number */
+		--switch-paddle-transition: all 0.25s ease-out;
+
+		/* Opacity of a disabled switch. */
+		/* @type Number */
+		--switch-opacity-disabled: 0.5;
+
+		/* Cursor for a disabled switch. */
+		/* @type Cursor */
+		--switch-cursor-disabled: not-allowed;
+
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin switch-container;
+		}
+
+		@mixin-content;
+	}
+
+	/* <input> element */
+	$(selector)$(input) {
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin switch-input;
+		}
+	}
+
+	/* <label> element */
+	$(selector)$(paddle) {
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin switch-paddle;
+		}
+	}
+
+	/* Active label text styles */
+	$(selector)$(active) {
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin switch-text;
+			@mixin switch-text-active;
+		}
+	}
+
+	/* Inactive label text styles */
+	$(selector)$(inactive) {
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin switch-text;
+			@mixin switch-text-inactive;
+		}
+	}
+
+	/* Switch sizes */
+	$(selector).tiny {
+		/* 10px = 0.625rem */
+		@mixin switch-size 0.625rem, var(--switch-height-tiny),
+			var(--switch-paddle-offset);
+	}
+
+	$(selector).small {
+		/* 12px = 0.75rem */
+		@mixin switch-size 0.75rem, var(--switch-height-small),
+			var(--switch-paddle-offset);
+	}
+
+	$(selector).large {
+		/* 16px = 1rem */
+		@mixin switch-size 1rem, var(--switch-height-large),
+			var(--switch-paddle-offset);
+	}
+}

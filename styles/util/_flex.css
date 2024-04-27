@@ -1,0 +1,31 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group functions */
+
+/* Enables flexbox by adding `display: flex` to the element. */
+@define-mixin flex {
+	display: flex;
+}
+
+/* Horizontally or vertically aligns the items within a flex container. */
+@define-mixin flex-align $x, $y {
+	justify-content: $(x);
+	align-items: $(y);
+}
+
+/* Vertically align a single column within a flex row. Apply this mixin to a flex column. */
+@define-mixin flex-align-self $y {
+	align-self: $(y);
+}
+
+/* Changes the source order of a flex child. Children with lower numbers appear first in the layout. */
+@define-mixin flex-order $order: 0 {
+	order: $(order);
+}
+
+/* Change flex-direction */
+@define-mixin flex-direction $direction: row {
+	flex-direction: $(direction);
+}

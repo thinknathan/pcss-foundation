@@ -1,0 +1,101 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group label */
+
+@define-mixin label $padding: var(--label-padding),
+	$border-radius: var(--label-radius), $font-size: var(--label-font-size),
+	$background: var(--label-background), $color: var(--label-color) {
+	display: inline-block;
+	padding: $(padding);
+	border-radius: $(border-radius);
+	font-size: $(font-size);
+	line-height: 1;
+	white-space: nowrap;
+	cursor: default;
+	background: $(background);
+	color: $(color);
+}
+
+@define-mixin foundation-label $selector {
+	$(selector) {
+		/* Default background color for labels. */
+		/* @type Color */
+		--label-background: var(--zf-color-primary, green);
+
+		/* Default text color for labels. */
+		/* @type Color */
+		--label-color: var(--zf-color-white, white);
+
+		/* Alternate text color for labels. */
+		/* @type Color */
+		--label-color-alt: var(--zf-color-black, black);
+
+		/* Coloring classes. */
+		--label-palette-primary: var(--zf-color-primary, green);
+		--label-palette-secondary: var(--zf-color-secondary, blue);
+		--label-palette-success: var(--zf-color-success, green);
+		--label-palette-warning: var(--zf-color-warning, orange);
+		--label-palette-alert: var(--zf-color-alert, red);
+
+		/* Default font size for labels. */
+		/* @type Number */
+		--label-font-size: 0.8rem;
+
+		/* Default padding inside labels. */
+		/* @type Number */
+		--label-padding: 0.3333rem 0.5rem;
+
+		/* Default radius of labels. */
+		/* @type Number */
+		--label-radius: var(--zf-global-radius, 0);
+
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin label;
+		}
+
+		&.primary {
+			background: var(--label-palette-primary);
+			color: var(--label-color);
+			color: color-contrast(
+				var(--label-palette-primary) vs var(--label-color),
+				var(--label-color-alt)
+			);
+		}
+		&.secondary {
+			background: var(--label-palette-secondary);
+			color: var(--label-color);
+			color: color-contrast(
+				var(--label-palette-secondary) vs var(--label-color),
+				var(--label-color-alt)
+			);
+		}
+		&.success {
+			background: var(--label-palette-success);
+			color: var(--label-color);
+			color: color-contrast(
+				var(--label-palette-success) vs var(--label-color),
+				var(--label-color-alt)
+			);
+		}
+		&.warning {
+			background: var(--label-palette-warning);
+			color: var(--label-color);
+			color: color-contrast(
+				var(--label-palette-warning) vs var(--label-color),
+				var(--label-color-alt)
+			);
+		}
+		&.alert {
+			background: var(--label-palette-alert);
+			color: var(--label-color);
+			color: color-contrast(
+				var(--label-palette-alert) vs var(--label-color),
+				var(--label-color-alt)
+			);
+		}
+	}
+	@mixin-content;
+}

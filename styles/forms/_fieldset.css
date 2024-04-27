@@ -1,0 +1,52 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group forms */
+
+@define-mixin foundation-form-fieldset $padding: 0.1875rem {
+	fieldset {
+		margin: 0;
+		padding: 0;
+		border: 0;
+	}
+
+	legend {
+		max-width: 100%;
+		margin-bottom: calc(var(--zf-form-spacing) * 0.5);
+	}
+
+	.fieldset {
+		/* Default border around custom fieldsets. */
+		/* @type Border */
+		--fieldset-border: 1px solid var(--zf-color-medium-gray, gray);
+
+		/* Default padding inside custom fieldsets. */
+		/* @type Number */
+		/* 20px = 1.25rem */
+		--fieldset-padding: 1.25rem;
+
+		/* Default margin around custom fieldsets. */
+		/* @type Number */
+		/* 18px = 1.125rem */
+		--fieldset-margin: 1.125rem 0;
+
+		/* Default padding between the legend text and fieldset border. */
+		/* @type Number */
+		/* 3px = 0.1875rem */
+		--legend-padding: 0 $(padding);
+
+		margin: var(--fieldset-margin);
+		padding: var(--fieldset-padding);
+		border: var(--fieldset-border);
+
+		legend {
+			/* Covers up the fieldset's border to create artificial padding */
+			margin: 0;
+			margin-left: calc($(padding) * -1);
+			padding: var(--legend-padding);
+		}
+
+		@mixin-content;
+	}
+}

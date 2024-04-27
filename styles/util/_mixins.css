@@ -1,0 +1,112 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group functions */
+
+/* Creates a CSS triangle, which can be used for dropdown arrows, dropdown pips, and more. Use this mixin inside a `&::before` or `&::after` selector, to attach the triangle to an existing element. */
+@define-mixin css-triangle-down $triangle-size, $triangle-color {
+	display: block;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: $(triangle-size);
+	content: '';
+
+	border-bottom-width: 0;
+	border-color: $(triangle-color) transparent transparent;
+}
+
+@define-mixin css-triangle-up $triangle-size, $triangle-color {
+	display: block;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: $(triangle-size);
+	content: '';
+
+	border-top-width: 0;
+	border-color: transparent transparent $(triangle-color);
+}
+
+@define-mixin css-triangle-right $triangle-size, $triangle-color {
+	display: block;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: $(triangle-size);
+	content: '';
+
+	border-right-width: 0;
+	border-color: transparent transparent transparent $(triangle-color);
+}
+
+@define-mixin css-triangle-left $triangle-size, $triangle-color {
+	display: block;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: $(triangle-size);
+	content: '';
+
+	border-left-width: 0;
+	border-color: transparent $(triangle-color) transparent transparent;
+}
+
+/* Makes an element visually hidden, but still accessible to keyboards and assistive devices. */
+/* @link http://snook.ca/archives/html_and_css/hiding-content-for-accessibility Hiding Content for Accessibility */
+/* @link http://hugogiraudel.com/2016/10/13/css-hide-and-seek/ */
+@define-mixin element-invisible $important {
+	position: absolute $(important);
+	width: 1px $(important);
+	height: 1px $(important);
+	padding: 0 $(important);
+	overflow: hidden $(important);
+	clip: rect(0, 0, 0, 0) $(important);
+	white-space: nowrap $(important);
+	border: 0 $(important);
+}
+
+/* Reverses the CSS output created by the `element-invisible()` mixin. */
+@define-mixin element-invisible-off $important {
+	position: static $(important);
+	width: auto $(important);
+	height: auto $(important);
+	overflow: visible $(important);
+	clip: auto $(important);
+	white-space: normal $(important);
+}
+
+/* Vertically centers the element inside of its first non-static parent, */
+/* @link http://www.sitepoint.com/centering-with-sass/ Centering With Sass */
+@define-mixin vertical-center {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+/* Horizontally centers the element inside of its first non-static parent, */
+/* @link http://www.sitepoint.com/centering-with-sass/ Centering With Sass */
+@define-mixin horizontal-center {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+/* Absolutely centers the element inside of its first non-static parent, */
+/* @link http://www.sitepoint.com/centering-with-sass/ Centering With Sass */
+@define-mixin absolute-center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/* Clearfix */
+@define-mixin clearfix {
+	&::after {
+		content: '';
+		clear: both;
+		display: table;
+	}
+}

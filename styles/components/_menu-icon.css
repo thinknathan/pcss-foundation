@@ -1,0 +1,75 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group menu-icon */
+
+@define-mixin foundation-menu-icon $selector, $width: 20px, $height: 16px,
+	$weight: 2px {
+	$(selector) {
+		/* @type Number */
+		--menu-icon-color: var(--titlebar-icon-color, white);
+
+		/* @type Number */
+		--menu-icon-color-hover: var(--titlebar-icon-color-hover, gray);
+
+		/* @type Number */
+		--menu-icon-dark-color: var(--zf-color-black, black);
+
+		/* @type Number */
+		--menu-icon-dark-color-hover: var(--zf-color-dark-gray, gray);
+
+		/* Icon container */
+		position: relative;
+		display: inline-block;
+		vertical-align: middle;
+		width: $(width);
+		height: $(height);
+		cursor: pointer;
+
+		/* Icon bars */
+		&::after {
+			position: absolute;
+			top: 0;
+			left: 0;
+
+			display: block;
+			width: 100%;
+			height: $(weight);
+
+			background: var(--menu-icon-color);
+			box-shadow:
+				0 7px 0 var(--menu-icon-color),
+				0 14px 0 var(--menu-icon-color);
+
+			content: '';
+		}
+
+		/* stylelint-disable-next-line selector-pseudo-element-no-unknown */
+		&::hover::after {
+			background: var(--menu-icon-color-hover);
+			box-shadow:
+				0 7px 0 var(--menu-icon-color-hover),
+				0 14px 0 var(--menu-icon-color-hover);
+		}
+
+		@mixin-content;
+	}
+
+	$(selector).dark {
+		&::after {
+			background: var(--menu-icon-dark-color);
+			box-shadow:
+				0 7px 0 var(--menu-icon-dark-color),
+				0 14px 0 var(--menu-icon-dark-color);
+		}
+
+		/* stylelint-disable-next-line selector-pseudo-element-no-unknown */
+		&::hover::after {
+			background: var(--menu-icon-dark-color-hover);
+			box-shadow:
+				0 7px 0 var(--menu-icon-dark-color-hover),
+				0 14px 0 var(--menu-icon-dark-color-hover);
+		}
+	}
+}

@@ -1,0 +1,279 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group table */
+
+@define-mixin table-stripe-even {
+	tr {
+		/* If stripe is set to even, darken the even rows. */
+		&:nth-child(even) {
+			border-bottom: 0;
+			background-color: var(--table-striped-background);
+		}
+	}
+}
+
+@define-mixin table-stripe-odd {
+	tr {
+		/* If stripe is set to odd, darken the odd rows. */
+		&:nth-child(odd) {
+			background-color: var(--table-striped-background);
+		}
+	}
+}
+
+/* Adds the general styles for tables. */
+@define-mixin table {
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: var(--zf-global-margin);
+	border-radius: var(--zf-global-radius);
+
+	thead,
+	tbody,
+	tfoot {
+		border: var(--table-border);
+		background-color: var(--table-background);
+	}
+
+	/* Caption */
+	caption {
+		padding: var(--table-padding);
+		font-weight: var(--zf-global-weight-bold);
+	}
+
+	/* Table head */
+	thead {
+		background: var(--table-head-background);
+		color: var(--table-head-font-color);
+	}
+
+	/* Table foot */
+	tfoot {
+		background: var(--table-foot-background);
+		color: var(--table-foot-font-color);
+	}
+
+	/* Table head and foot */
+	thead,
+	tfoot {
+		/* Rows within head and foot */
+		tr {
+			background: transparent;
+		}
+
+		/* Cells within head and foot */
+		th,
+		td {
+			padding: var(--table-padding);
+			font-weight: var(--zf-global-weight-bold);
+			text-align: left;
+		}
+	}
+
+	/* Table rows */
+	tbody {
+		@mixin table-stripe-even;
+
+		th,
+		td {
+			padding: var(--table-padding);
+		}
+	}
+
+	&.unstriped {
+		tbody {
+			tr {
+				border-bottom: var(--table-border);
+				background-color: var(--table-background);
+			}
+			background-color: var(--table-background);
+		}
+	}
+}
+
+/* Adds the ability to horizontally scroll the table when the content overflows horizontally. */
+@define-mixin table-scroll {
+	display: block;
+	width: 100%;
+	overflow-x: auto;
+}
+
+/* Slightly darkens the table rows on hover. */
+@define-mixin table-hover {
+	thead tr {
+		/* Darkens the table header rows on hover. */
+		&:hover {
+			background-color: var(--table-head-row-hover);
+		}
+	}
+
+	tfoot tr {
+		/* Darkens the table footer rows on hover. */
+		&:hover {
+			background-color: var(--table-foot-row-hover);
+		}
+	}
+
+	tbody tr {
+		/* Darkens the non-striped table rows on hover. */
+		&:hover {
+			background-color: var(--table-row-hover);
+		}
+	}
+
+	/* Darkens the even striped table rows. */
+	&:not(.unstriped) tr:nth-of-type(even):hover {
+		background-color: var(--table-row-stripe-hover);
+	}
+}
+
+/* Adds styles for a stacked table. Useful for small-screen layouts. */
+@define-mixin table-stack {
+	thead {
+		th {
+			display: block;
+		}
+	}
+
+	tfoot {
+		display: none;
+	}
+
+	tr,
+	th,
+	td {
+		display: block;
+	}
+
+	td {
+		border-top: 0;
+	}
+}
+
+@define-mixin foundation-table {
+	table {
+		/* Default color for table background. */
+		/* @type Color */
+		--table-background: var(--zf-color-white, white);
+
+		/* Default scale for darkening the striped table rows and the table border. */
+		/* @type Number */
+		--table-color-scale: 95%;
+
+		/* Default style for table border. */
+		/* @type List */
+		--table-border: 1px solid
+			color-mix(
+				in srgb,
+				var(--table-background) var(--table-color-scale),
+				black
+			);
+
+		/* Default padding for table. */
+		/* @type Number */
+		/* 8px = 0.5rem, 10px = 0.625rem */
+		--table-padding: 0.5rem 0.625rem 0.625rem;
+
+		/* Default scale for darkening the table rows on hover. */
+		/* @type Number */
+		--table-hover-scale: 98%;
+
+		/* Default color of standard rows on hover. */
+		/* @type List */
+		--table-row-hover: color-mix(
+			in srgb,
+			var(--table-background) var(--table-hover-scale),
+			black
+		);
+
+		/* Default color of striped rows on hover. */
+		/* @type List */
+		--table-row-stripe-hover: color-mix(
+			in srgb,
+			var(--table-background)
+				calc(var(--table-color-scale) + var(--table-hover-scale)),
+			black
+		);
+
+		/* Default background color for striped rows. */
+		/* @type Color */
+		--table-striped-background: color-mix(
+			in srgb,
+			var(--table-background) var(--table-color-scale),
+			black
+		);
+
+		/* Default color for header background. */
+		/* @type Color */
+		--table-head-background: color-mix(
+			in srgb,
+			var(--table-background) calc(var(--table-color-scale) * 1.025),
+			black
+		);
+
+		/* Default color of header rows on hover. */
+		/* @type List */
+		--table-head-row-hover: color-mix(
+			in srgb,
+			var(--table-head-background) var(--table-hover-scale),
+			black
+		);
+
+		/* Default color for footer background. */
+		/* @type Color */
+		--table-foot-background: color-mix(
+			in srgb,
+			var(--table-background) var(--table-color-scale),
+			black
+		);
+
+		/* Default color of footer rows on hover. */
+		/* @type List */
+		--table-foot-row-hover: color-mix(
+			in srgb,
+			var(--table-foot-background) var(--table-hover-scale),
+			black
+		);
+
+		/* Default font color for header. */
+		/* @type Color */
+		--table-head-font-color: var(--zf-body-font-color, black);
+
+		/* Default font color for footer. */
+		/* @type Color */
+		--table-foot-font-color: var(--zf-body-font-color, black);
+
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin table;
+		}
+
+		@mixin-content;
+	}
+
+	table.stack {
+		@media (--zf-medium-down) {
+			@mixin table-stack;
+		}
+	}
+
+	table.scroll {
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin table-scroll;
+		}
+	}
+
+	table.hover {
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin table-hover;
+		}
+	}
+
+	.table-scroll {
+		overflow-x: auto;
+	}
+}

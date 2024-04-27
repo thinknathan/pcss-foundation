@@ -1,0 +1,18 @@
+{
+	"version": "1.0.0",
+	"name": "pcss-foundation",
+	"license": "MIT",
+	"scripts": {
+		"lint": "stylelint \"styles/**/*.css\""
+	},
+	"main": "./styles/foundation.css",
+	"style": "./styles/foundation.css",
+	"devDependencies": {
+		"stylelint": "^16.3.1",
+		"stylelint-config-standard": "^36.0.0"
+	},
+	"peerDependencies": {
+		"postcss": "*",
+		"postcss-mixins": "*"
+	}
+}

@@ -1,0 +1,101 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group progress-bar */
+
+@define-mixin progress-container $height: var(--progress-height),
+	$margin-bottom: var(--progress-margin-bottom),
+	$background: var(--progress-background),
+	$border-radius: var(--progress-radius) {
+	height: $(height);
+	margin-bottom: $(margin-bottom);
+	border-radius: $(border-radius);
+	background-color: $(background);
+}
+
+@define-mixin progress-meter $background-color: var(--progress-meter-background),
+	$border-radius: var(--zf-global-radius) {
+	position: relative;
+	display: block;
+	width: 0%;
+	height: 100%;
+	background-color: $(background-color);
+	border-radius: $(border-radius);
+}
+
+@define-mixin progress-meter-text $color: var(--zf-color-white),
+	$border-radius: var(--progress-radius) {
+	margin: 0;
+	font-size: 0.75rem;
+	font-weight: bold;
+	color: $(color);
+	white-space: nowrap;
+	border-radius: $(border-radius);
+}
+
+@define-mixin foundation-progress-bar $selector, $meter: -meter,
+	$meter-text: -meter-text {
+	/* Progress bar */
+	$(selector) {
+		--progress-height: 1rem;
+		--progress-background: var(--zf-color-medium-gray, gray);
+		--progress-margin-bottom: var(--zf-global-margin, 1rem);
+		--progress-meter-background: var(--zf-color-primary, green);
+		--progress-radius: var(--zf-global-radius, 0);
+
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin progress-container;
+		}
+
+		&.primary {
+			.progress-meter {
+				background-color: var(--zf-color-primary);
+			}
+		}
+
+		&.secondary {
+			.progress-meter {
+				background-color: var(--zf-color-secondary);
+			}
+		}
+
+		&.success {
+			.progress-meter {
+				background-color: var(--zf-color-success);
+			}
+		}
+
+		&.warning {
+			.progress-meter {
+				background-color: var(--zf-color-warning);
+			}
+		}
+
+		&.alert {
+			.progress-meter {
+				background-color: var(--zf-color-alert);
+			}
+		}
+
+		@mixin-content;
+	}
+
+	/* Inner meter */
+	$(selector)$(meter) {
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin progress-meter;
+		}
+	}
+
+	/* Inner meter text */
+	$(selector)$(meter-text) {
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			@mixin progress-meter-text;
+			@mixin absolute-center;
+		}
+	}
+}

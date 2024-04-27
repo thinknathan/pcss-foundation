@@ -1,0 +1,101 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group xy-grid */
+
+/**
+ * For backwards compatibility
+ */
+@define-mixin xy-grid {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+@define-mixin xy-grid-container $gutter-left: 1, $gutter-right: 1,
+	$breakpoint: medium {
+	max-width: var(--zf-global-width);
+	margin-left: auto;
+	margin-right: auto;
+
+	padding-left: calc(0.625rem * $(gutter-left));
+	padding-right: calc(0.625rem * $(gutter-right));
+
+	/* stylelint-disable-next-line media-query-no-invalid */
+	@media (--zf-$(breakpoint)) {
+		padding-left: calc(0.9375rem * $(gutter-left));
+		padding-right: calc(0.9375rem * $(gutter-right));
+	}
+}
+
+@define-mixin xy-cell $gutter-left: 0, $gutter-right: 0, $breakpoint: medium {
+	flex: 0 0 auto;
+	min-height: 0;
+	min-width: 0;
+	width: 100%;
+
+	padding-left: calc(0.625rem * $(gutter-left));
+	padding-right: calc(0.625rem * $(gutter-right));
+
+	/* stylelint-disable-next-line media-query-no-invalid */
+	@media (--zf-$(breakpoint)) {
+		padding-left: calc(0.9375rem * $(gutter-left));
+		padding-right: calc(0.9375rem * $(gutter-right));
+	}
+}
+
+@define-mixin xy-cell-auto {
+	flex: 1 1 0;
+}
+
+@define-mixin xy-cell-shrink {
+	flex: 0 0 auto;
+}
+
+@define-mixin xy-cell-1-of-12 {
+	width: 8.3333%;
+}
+
+@define-mixin xy-cell-2-of-12 {
+	width: 16.6667%;
+}
+
+@define-mixin xy-cell-3-of-12 {
+	width: 25%;
+}
+
+@define-mixin xy-cell-4-of-12 {
+	width: 33.3333%;
+}
+
+@define-mixin xy-cell-5-of-12 {
+	width: 41.6667%;
+}
+
+@define-mixin xy-cell-6-of-12 {
+	width: 50%;
+}
+
+@define-mixin xy-cell-7-of-12 {
+	width: 58.3333%;
+}
+
+@define-mixin xy-cell-8-of-12 {
+	width: 66.6667%;
+}
+
+@define-mixin xy-cell-9-of-12 {
+	width: 75%;
+}
+
+@define-mixin xy-cell-10-of-12 {
+	width: 83.3333%;
+}
+
+@define-mixin xy-cell-11-of-12 {
+	width: 91.6667%;
+}
+
+@define-mixin xy-cell-12-of-12 {
+	width: 100%;
+}

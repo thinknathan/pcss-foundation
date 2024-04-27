@@ -1,0 +1,32 @@
+/* Foundation for Sites */
+/* https://get.foundation */
+/* Licensed under MIT Open Source */
+
+/* @group functions */
+
+/**
+ * @property {string} property
+ * @property {string} color
+ * @property {string} opacity with %
+ */
+@define-mixin color-opacity $property, $color, $opacity {
+	$(property): color-mix(in srgb, $(color) $(opacity), transparent);
+}
+
+/**
+ * @property {string} property
+ * @property {string} color
+ * @property {string} opacity with %
+ */
+@define-mixin darken $property, $color, $blend {
+	$(property): color-mix(in srgb, $(color) $(blend), black);
+}
+
+/**
+ * @property {string} property
+ * @property {string} color
+ * @property {string} blend with %
+ */
+@define-mixin lighten $property, $color, $blend {
+	$(property): color-mix(in srgb, $(color) $(blend), white);
+}
