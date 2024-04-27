@@ -7,7 +7,6 @@ npm-debug.log
 yarn-error.log
 sitemap.json
 webpack-stats.json
-vendor
 assets/config-local.json
 
 *.DS_Store
