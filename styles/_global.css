@@ -121,7 +121,7 @@
 
 		background: var(--zf-body-background);
 
-		font-family: var(--body-font-family);
+		font-family: var(--zf-body-font-family);
 		font-weight: var(--zf-global-weight-normal);
 		line-height: var(--zf-global-lineheight);
 		color: var(--zf-body-font-color);

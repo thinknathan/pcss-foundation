@@ -171,22 +171,22 @@
 		}
 
 		&.secondary {
-			@mixin button-style var(--button-palette-secondary)
+			@mixin button-style var(--button-palette-secondary),
 				var(--button-palette-secondary);
 		}
 
 		&.success {
-			@mixin button-style var(--button-palette-success)
+			@mixin button-style var(--button-palette-success),
 				var(--button-palette-success);
 		}
 
 		&.warning {
-			@mixin button-style var(--button-palette-warning)
+			@mixin button-style var(--button-palette-warning),
 				var(--button-palette-warning);
 		}
 
 		&.alert {
-			@mixin button-style var(--button-palette-alert)
+			@mixin button-style var(--button-palette-alert),
 				var(--button-palette-alert);
 		}
 

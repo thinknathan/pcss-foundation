@@ -24,7 +24,7 @@
 	:root {
 		/* Font family for header elements. */
 		/* @type String | List */
-		--zf-header-font-family: var(--body-font-family, sans-serif);
+		--zf-header-font-family: var(--zf-body-font-family, sans-serif);
 
 		/* Font weight of headers. */
 		/* @type String */
