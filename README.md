@@ -13,6 +13,12 @@ A partial re-implementation of CSS from [Foundation for Sites](https://get.found
 - Grid: not included (use native CSS grid instead)
 - XY-Grid: limited mixins included for backwards compatibility
 
+## Requirements
+
+- NodeJS or equivalent
+- [PostCSS](https://postcss.org/)
+- [PostCSS-Mixins](https://github.com/postcss/postcss-mixins)
+
 ## Installation
 
 `npm install pcss-foundation`
