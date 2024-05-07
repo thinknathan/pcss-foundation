@@ -68,6 +68,69 @@
 	}
 }
 
+@define-mixin button-hollow {
+	&,
+	&.disabled,
+	&[disabled] {
+		&,
+		&:hover,
+		&:focus {
+			background-color: transparent;
+		}
+	}
+}
+
+@define-mixin button-hollow-style $color: var(--button-palette-primary),
+	$hover-lightness: var(--button-hollow-hover-lightness) {
+	&,
+	&.disabled,
+	&[disabled],
+	&.disabled:hover,
+	&[disabled]:hover,
+	&.disabled:focus,
+	&[disabled]:focus {
+		border: 1px solid $(color);
+		color: $(color);
+	}
+
+	&:hover,
+	&:focus {
+		border: 1px solid color-mix(in srgb, $(color) $(hover-lightness), black);
+		color: color-mix(in srgb, $(color) $(hover-lightness), black);
+	}
+}
+
+@define-mixin button-clear {
+	&,
+	&.disabled,
+	&[disabled] {
+		&,
+		&:hover,
+		&:focus {
+			border-color: transparent;
+			background-color: transparent;
+		}
+	}
+}
+
+@define-mixin button-clear-style $color: var(--button-palette-primary),
+	$hover-lightness: var(--button-hollow-hover-lightness) {
+	&,
+	&.disabled,
+	&[disabled],
+	&.disabled:hover,
+	&[disabled]:hover,
+	&.disabled:focus,
+	&[disabled]:focus {
+		color: $(color);
+	}
+
+	&:hover,
+	&:focus {
+		color: color-mix(in srgb, $(color) $(hover-lightness), black);
+	}
+}
+
 @define-mixin foundation-button $element {
 	$(element) {
 		/* Font family for button elements. */
@@ -192,283 +255,62 @@
 
 		/* Hollow */
 		&.hollow {
-			&,
-			&.disabled,
-			&[disabled] {
-				&,
-				&:hover,
-				&:focus {
-					background-color: transparent;
-				}
-			}
+			@mixin button-hollow;
 
 			&.primary {
-				&,
-				&.disabled,
-				&[disabled],
-				&.disabled:hover,
-				&[disabled]:hover,
-				&.disabled:focus,
-				&[disabled]:focus {
-					border: 1px solid var(--button-palette-primary);
-					color: var(--button-palette-primary);
-				}
-
-				&:hover,
-				&:focus {
-					border: 1px solid
-						color-mix(
-							in srgb,
-							var(--button-palette-primary)
-								var(--button-background-hover-lightness),
-							black
-						);
-					color: color-mix(
-						in srgb,
-						var(--button-palette-primary) var(--button-hollow-hover-lightness),
-						black
-					);
-				}
+				@mixin button-hollow-style var(--button-palette-primary),
+					var(--button-background-hover-lightness);
 			}
 
 			&.secondary {
-				&,
-				&.disabled,
-				&[disabled],
-				&.disabled:hover,
-				&[disabled]:hover,
-				&.disabled:focus,
-				&[disabled]:focus {
-					border: 1px solid var(--button-palette-secondary);
-					color: var(--button-palette-secondary);
-				}
-
-				&:hover,
-				&:focus {
-					border: 1px solid
-						color-mix(
-							in srgb,
-							var(--button-palette-secondary)
-								var(--button-background-hover-lightness),
-							black
-						);
-					color: color-mix(
-						in srgb,
-						var(--button-palette-secondary) var(--button-hollow-hover-lightness),
-						black
-					);
-				}
+				@mixin button-hollow-style var(--button-palette-secondary),
+					var(--button-background-hover-lightness);
 			}
 
 			&.success {
-				&,
-				&.disabled,
-				&[disabled],
-				&.disabled:hover,
-				&[disabled]:hover,
-				&.disabled:focus,
-				&[disabled]:focus {
-					border: 1px solid var(--button-palette-success);
-					color: var(--button-palette-success);
-				}
-
-				&:hover,
-				&:focus {
-					border: 1px solid
-						color-mix(
-							in srgb,
-							var(--button-palette-success)
-								var(--button-background-hover-lightness),
-							black
-						);
-					color: color-mix(
-						in srgb,
-						var(--button-palette-success) var(--button-hollow-hover-lightness),
-						black
-					);
-				}
+				@mixin button-hollow-style var(--button-palette-success),
+					var(--button-background-hover-lightness);
 			}
 
 			&.warning {
-				&,
-				&.disabled,
-				&[disabled],
-				&.disabled:hover,
-				&[disabled]:hover,
-				&.disabled:focus,
-				&[disabled]:focus {
-					border: 1px solid var(--button-palette-warning);
-					color: var(--button-palette-warning);
-				}
-
-				&:hover,
-				&:focus {
-					border: 1px solid
-						color-mix(
-							in srgb,
-							var(--button-palette-warning)
-								var(--button-background-hover-lightness),
-							black
-						);
-					color: color-mix(
-						in srgb,
-						var(--button-palette-warning) var(--button-hollow-hover-lightness),
-						black
-					);
-				}
+				@mixin button-hollow-style var(--button-palette-warning),
+					var(--button-background-hover-lightness);
 			}
 
 			&.alert {
-				&,
-				&.disabled,
-				&[disabled],
-				&.disabled:hover,
-				&[disabled]:hover,
-				&.disabled:focus,
-				&[disabled]:focus {
-					border: 1px solid var(--button-palette-alert);
-					color: var(--button-palette-alert);
-				}
-
-				&:hover,
-				&:focus {
-					border: 1px solid
-						color-mix(
-							in srgb,
-							var(--button-palette-alert)
-								var(--button-background-hover-lightness),
-							black
-						);
-					color: color-mix(
-						in srgb,
-						var(--button-palette-alert) var(--button-hollow-hover-lightness),
-						black
-					);
-				}
+				@mixin button-hollow-style var(--button-palette-alert),
+					var(--button-background-hover-lightness);
 			}
 		}
+	}
 
-		/* Clear */
-		&.clear {
-			&,
-			&.disabled,
-			&[disabled] {
-				&,
-				&:hover,
-				&:focus {
-					border-color: transparent;
-					background-color: transparent;
-				}
-			}
+	/* Clear */
+	&.clear {
+		@mixin button-clear;
 
-			&.primary {
-				&,
-				&.disabled,
-				&[disabled],
-				&.disabled:hover,
-				&[disabled]:hover,
-				&.disabled:focus,
-				&[disabled]:focus {
-					color: var(--button-palette-primary);
-				}
+		&.primary {
+			@mixin button-clear-style var(--button-palette-primary),
+				var(--button-background-hover-lightness);
+		}
 
-				&:hover,
-				&:focus {
-					color: color-mix(
-						in srgb,
-						var(--button-palette-primary)
-							var(--button-background-hover-lightness),
-						black
-					);
-				}
-			}
+		&.secondary {
+			@mixin button-clear-style var(--button-palette-secondary),
+				var(--button-background-hover-lightness);
+		}
 
-			&.secondary {
-				&,
-				&.disabled,
-				&[disabled],
-				&.disabled:hover,
-				&[disabled]:hover,
-				&.disabled:focus,
-				&[disabled]:focus {
-					color: var(--button-palette-secondary);
-				}
+		&.success {
+			@mixin button-clear-style var(--button-palette-success),
+				var(--button-background-hover-lightness);
+		}
 
-				&:hover,
-				&:focus {
-					color: color-mix(
-						in srgb,
-						var(--button-palette-secondary)
-							var(--button-background-hover-lightness),
-						black
-					);
-				}
-			}
+		&.warning {
+			@mixin button-clear-style var(--button-palette-warning),
+				var(--button-background-hover-lightness);
+		}
 
-			&.success {
-				&,
-				&.disabled,
-				&[disabled],
-				&.disabled:hover,
-				&[disabled]:hover,
-				&.disabled:focus,
-				&[disabled]:focus {
-					color: var(--button-palette-success);
-				}
-
-				&:hover,
-				&:focus {
-					color: color-mix(
-						in srgb,
-						var(--button-palette-success)
-							var(--button-background-hover-lightness),
-						black
-					);
-				}
-			}
-
-			&.warning {
-				&,
-				&.disabled,
-				&[disabled],
-				&.disabled:hover,
-				&[disabled]:hover,
-				&.disabled:focus,
-				&[disabled]:focus {
-					color: var(--button-palette-warning);
-				}
-
-				&:hover,
-				&:focus {
-					color: color-mix(
-						in srgb,
-						var(--button-palette-warning)
-							var(--button-background-hover-lightness),
-						black
-					);
-				}
-			}
-
-			&.alert {
-				&,
-				&.disabled,
-				&[disabled],
-				&.disabled:hover,
-				&[disabled]:hover,
-				&.disabled:focus,
-				&[disabled]:focus {
-					color: var(--button-palette-alert);
-				}
-
-				&:hover,
-				&:focus {
-					color: color-mix(
-						in srgb,
-						var(--button-palette-alert) var(--button-background-hover-lightness),
-						black
-					);
-				}
-			}
+		&.alert {
+			@mixin button-clear-style var(--button-palette-alert),
+				var(--button-background-hover-lightness);
 		}
 
 		/* Disabled state */
