@@ -1,13 +1,23 @@
 {
 	"version": "1.0.3",
 	"name": "pcss-foundation",
+	"description": "A partial re-implementation of CSS from Foundation for Sites built on PostCSS mixins",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/thinknathan/pcss-foundation.git"
+	},
+	"files": [
+		"styles"
+	],
 	"license": "MIT",
 	"scripts": {
-		"lint": "stylelint \"styles/**/*.css\""
+		"lint": "stylelint \"styles/**/*.css\"",
+		"prettier": "prettier \"./**/*.{yml,json,mjs,md,css}\" --write"
 	},
 	"main": "./styles/foundation.css",
 	"style": "./styles/foundation.css",
 	"devDependencies": {
+		"prettier": "^3.2.5",
 		"stylelint": "^16.3.1",
 		"stylelint-config-standard": "^36.0.0"
 	},
