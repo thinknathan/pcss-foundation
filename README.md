@@ -2,7 +2,7 @@
 
 A partial re-implementation of CSS from [Foundation for Sites](https://get.foundation/) built on PostCSS with `postcss-mixin` instead of SASS.
 
-## Overview:
+## Overview
 
 - Static components: included
 - Components with JS functionality: not included
@@ -12,3 +12,9 @@ A partial re-implementation of CSS from [Foundation for Sites](https://get.found
 - Utils and mixins: partially included when possible
 - Grid: not included (use native CSS grid instead)
 - XY-Grid: limited mixins included for backwards compatibility
+
+## Installation
+
+`npm install pcss-foundation`
+OR
+`yarn add pcss-foundation`
