@@ -17,6 +17,9 @@
 	"main": "./styles/foundation.css",
 	"style": "./styles/foundation.css",
 	"devDependencies": {
+		"@commitlint/cli": "^19.3.0",
+		"@commitlint/config-conventional": "^19.2.2",
+		"husky": "^9.0.11",
 		"prettier": "^3.2.5",
 		"stylelint": "^16.3.1",
 		"stylelint-config-standard": "^36.0.0"
